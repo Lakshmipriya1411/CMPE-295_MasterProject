@@ -42,7 +42,7 @@ def vegan():
         Returns:
             list of vegan recipes
     """
-    all_vegan_recipes = list(recipe_dataset.aggregate( [ { '$match': {'recipe_tags': {'$regex': 'vegan'} } } ]))
+    #all_vegan_recipes = list(recipe_dataset.aggregate( [ { '$match': {'recipe_tags': {'$regex': 'vegan'} } } ]))
     # vegan_df = pd.DataFrame(all_vegan_recipes)
     # local_vegan_df = df[df['recipe_tags'].str.contains('vegan')]
 
@@ -52,6 +52,21 @@ def vegan():
     #print(vegan_recipes)
 
     return render_template('index.html', recipes=vegan_recipes.to_dict('records'))
+
+@app.route("/nonvegan", methods=["GET"])
+def non_vegan():
+    """
+        GET api for finding nonvegan recipes
+        Returns:
+            list of nonvegan recipes
+    """
+    #all_nonvegan_recipes = list(recipe_dataset.aggregate( [ { '$match': {'recipe_tags': {'$regex': 'nonvegan'} } } ]))
+    
+    column_output = ['recipe_id','title','ingredients','recipe_tags']
+    nonvegan_recipes = df[~df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
+    #print(nonvegan_recipes)
+
+    return render_template('index.html', recipes=nonvegan_recipes.to_dict('records'))
 
 @app.route("/search", methods=["GET"])
 def search():
