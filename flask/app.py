@@ -42,15 +42,7 @@ def vegan():
         Returns:
             list of vegan recipes
     """
-    # all_vegan_recipes = list(recipe_dataset.aggregate([
-    #     {
-    #         '$match': {
-    #             'recipe_tags': {
-    #                 '$regex': 'vegan'
-    #             }
-    #         }
-    #     }
-    # ]))
+    all_vegan_recipes = list(recipe_dataset.aggregate( [ { '$match': {'recipe_tags': {'$regex': 'vegan'} } } ]))
     # vegan_df = pd.DataFrame(all_vegan_recipes)
     # local_vegan_df = df[df['recipe_tags'].str.contains('vegan')]
 
