@@ -42,12 +42,24 @@ def vegan():
         Returns:
             list of vegan recipes
     """
-    # TODO either use local DF or find a query for mongodb without duplicate recipes
-    #recipes = recipe_dataset.aggregate([ { "$group": { "_id":'recipe_tags'}}, {$limit:5}])
-    recipes = list(recipe_dataset.find({ "recipe_tags" : { "$regex" : "vegan" } }).limit(10).distinct("recipe_id"))
-    for r in recipes:
-        print(r)
-    return render_template('index.html', recipes=recipes)
+    # all_vegan_recipes = list(recipe_dataset.aggregate([
+    #     {
+    #         '$match': {
+    #             'recipe_tags': {
+    #                 '$regex': 'vegan'
+    #             }
+    #         }
+    #     }
+    # ]))
+    # vegan_df = pd.DataFrame(all_vegan_recipes)
+    # local_vegan_df = df[df['recipe_tags'].str.contains('vegan')]
+
+    column_output = ['recipe_id','title','ingredients','recipe_tags']
+    #vegan_recipes = vegan_df.groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
+    vegan_recipes = df[df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
+    #print(vegan_recipes)
+
+    return render_template('index.html', recipes=vegan_recipes.to_dict('records'))
 
 @app.route("/search", methods=["GET"])
 def search():
