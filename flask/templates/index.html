@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Recipes
+    </title>
+</head>
+<body>
+    <h1>Recipes</h1>
+    <hr>
+    <div>
+        {% for recipe in recipes %}
+            <div>
+                <p>{{ recipe['title'] }} <i>({{ recipe['ingredients']}})</i></p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
