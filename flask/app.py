@@ -1,6 +1,8 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from surprise import dump 
 from pymongo import MongoClient
+from bson import json_util
+import json
 from sklearn.metrics import pairwise_distances
 from sklearn.feature_extraction.text import TfidfTransformer, TfidfVectorizer
 import numpy as np
@@ -35,38 +37,36 @@ def hello_world():
     all_recipe = recipe_dataset.find().limit(10)
     return render_template('index.html', recipes=all_recipe)
 
-@app.route("/vegan", methods=["GET"])
+@app.route("/vegetarian", methods=["GET"])
 def vegan():
     """
-        GET api for finding vegan recipes
+        GET api for finding vegetarian recipes
         Returns:
-            list of vegan recipes
+            list of vegetarian recipes
     """
     #all_vegan_recipes = list(recipe_dataset.aggregate( [ { '$match': {'recipe_tags': {'$regex': 'vegan'} } } ]))
     # vegan_df = pd.DataFrame(all_vegan_recipes)
     # local_vegan_df = df[df['recipe_tags'].str.contains('vegan')]
 
-    column_output = ['recipe_id','title','ingredients','recipe_tags']
+    column_output = ['recipe_id','title','ingredients','recipe_tags','date','directions','description','nutrition','minutes']
     #vegan_recipes = vegan_df.groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
-    vegan_recipes = df[df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
-    #print(vegan_recipes)
+    vegan_recipes = df[df['recipe_tags'].str.contains('vegetarian')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
 
-    return render_template('index.html', recipes=vegan_recipes.to_dict('records'))
+    return jsonify(vegan_recipes.to_dict('records'))
 
-@app.route("/nonvegan", methods=["GET"])
+@app.route("/nonvegetarian", methods=["GET"])
 def non_vegan():
     """
-        GET api for finding nonvegan recipes
+        GET api for finding nonvegetarian recipes
         Returns:
-            list of nonvegan recipes
+            list of nonvegetarian recipes
     """
     #all_nonvegan_recipes = list(recipe_dataset.aggregate( [ { '$match': {'recipe_tags': {'$regex': 'nonvegan'} } } ]))
     
     column_output = ['recipe_id','title','ingredients','recipe_tags']
-    nonvegan_recipes = df[~df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
-    #print(nonvegan_recipes)
+    nonvegan_recipes = df[~df['recipe_tags'].str.contains('vegetarian')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
 
-    return render_template('index.html', recipes=nonvegan_recipes.to_dict('records'))
+    return jsonify(nonvegan_recipes.to_dict('records'))
 
 @app.route("/search", methods=["GET"])
 def search():
@@ -75,17 +75,19 @@ def search():
         Returns:
             list of recipes
     """
-    indices = run_tfidf("['brown sugar', ' milk', ' vanilla', ' nuts', ' butter', ' bite size shredded rice biscuits']", 20)
+    ingredients = request.form.get('ingredients')
+    user_id = request.form.get('user_id')
+
+    indices = run_tfidf(ingredients, 20)
     str_indices = [str(x) for x in indices]
     recipes = list(recipe_dataset.find( { "" : { "$in" : str_indices } } ) )
 
     rating_df = pd.DataFrame(recipes)
-    #print(rating_df)
-    rating_df['estimate_rating'] = rating_df['recipe_id'].apply(lambda x: collaborative_filtering_model[1].predict(4470, x).est)
+    rating_df['estimate_rating'] = rating_df['recipe_id'].apply(lambda x: collaborative_filtering_model[1].predict(user_id, x).est)
     rating_df = rating_df.drop_duplicates(subset="recipe_id")
     rating_df = rating_df.sort_values('estimate_rating', ascending=False)
 
-    return render_template('index.html', recipes=rating_df.to_dict('records'))
+    return parse_json(rating_df.to_dict('records'))
 
 def run_tfidf(input_ner, num_results):
     """
@@ -105,19 +107,13 @@ def run_tfidf(input_ner, num_results):
 
     return df_indices
 
-# def run_tfidf(input_ner, num_results):
-#     input_tfidf = TfidfVectorizer(vocabulary=tfidf_vectorizer.vocabulary_)
-#     input_vector = input_tfidf.fit_transform(pd.Series(input_ner))
-#     # print(pd.Series([input_ner]).shape)
-#     pairwise_dist = pairwise_distances(tfidf_feature, input_vector)
-#     # print(pairwise_dist.shape)
-#     indices = np.argsort(pairwise_dist.flatten())[0:num_results]
-#     #pdists will store the 9 smallest distances
-#     pdists  = np.sort(pairwise_dist.flatten())[0:num_results]
-#     # print(indices)
-#     #data frame indices of the 9 smallest distace's
-#     df_indices = list(df_search.index[indices])
-#     return df_indices
+def parse_json(data):
+    """
+        Serializes MongoDB objects with ObjectId. Can't serialize normally if it has it.
+        Returns:
+            json return object
+    """
+    return json.loads(json_util.dumps(data))
 
 if __name__ == "__main__":
     app.run()
