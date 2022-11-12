@@ -9,8 +9,8 @@ import pandas as pd
 import pickle
 import os
 
-df = pd.read_csv('../recipe_dataset.csv', header = 0)
-#df = pd.read_csv('~/Downloads/recipe_dataset.csv', header = 0)
+#df = pd.read_csv('../recipe_dataset.csv', header = 0)
+df = pd.read_csv('~/Downloads/recipe_dataset.csv', header = 0)
 #df = db.recipe_dataset.find()
 
 df_search = df.copy()
@@ -19,12 +19,12 @@ tfidf_title_vectorizer = TfidfVectorizer()
 tfidf_title_features = tfidf_title_vectorizer.fit_transform(df_search['ingredients'])
 
 # Load both models (tfidf not used as of now)
-# tfidf_vectorizer = pickle.load(open(os.path.expanduser("~/Downloads/tfidf_vectorizer.pkl"), 'rb'))
-# tfidf_feature = pickle.load(open(os.path.expanduser("~/Downloads/tfidf_feature.pkl"), "rb"))
-# collaborative_filtering_model = dump.load(os.path.expanduser('~/Downloads/model.pkl'))
-tfidf_vectorizer = pickle.load(open('~/tfidf_vectorizer.pkl', 'rb'))
-tfidf_feature = pickle.load(open('~/tfidf_feature.pkl', "rb"))
-collaborative_filtering_model = dump.load('../models/model.pkl')  
+tfidf_vectorizer = pickle.load(open(os.path.expanduser("~/Downloads/tfidf_vectorizer.pkl"), 'rb'))
+tfidf_feature = pickle.load(open(os.path.expanduser("~/Downloads/tfidf_feature.pkl"), "rb"))
+collaborative_filtering_model = dump.load(os.path.expanduser('~/Downloads/model.pkl'))
+# tfidf_vectorizer = pickle.load(open('~/tfidf_vectorizer.pkl', 'rb'))
+# tfidf_feature = pickle.load(open('~/tfidf_feature.pkl', "rb"))
+# collaborative_filtering_model = dump.load('../models/model.pkl')  
 
 class Service:
     def __init__(self,collection) -> None:

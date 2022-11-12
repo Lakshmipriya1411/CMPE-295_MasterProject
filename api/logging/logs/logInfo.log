@@ -2088,3 +2088,75 @@ flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------End of 
 flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------Enter Get Non Vegan Recipes---------------
 flask_restx.namespace.api/recipes/cookingtime - INFO - Get Non Vegan Recipes success
 flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------End of Get Non Vegan Recipes---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------Enter Get Non Vegan Recipes---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - Get Non Vegan Recipes success
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------End of Get Non Vegan Recipes---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------Enter get Vegan Recipes---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - Get Vegan Recipes success
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------End of Get Vegan Recipes---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------Enter get Recipes By Cooking Time---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - Get Recipe By Cooking Time success
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------End of Get REcipes By Cooking Time---------------
+flask_restx.namespace.api/recipes/cuisine - INFO - ------------------Enter get Recipes By Selected RecipeID--------------
+flask_restx.namespace.api/recipes/cuisine - INFO - Get Selected Recipe By Id success
+flask_restx.namespace.api/recipes/cuisine - INFO - ------------------End of Get Reipes By Selected RecipeID---------------
+flask_restx.namespace.api/recipes/cuisine - INFO - ------------------Enter get Recipes By All Cusine Types---------------
+flask_restx.namespace.api/recipes/cuisine - INFO - Got Recipes By All Cusine Types successfully
+flask_restx.namespace.api/recipes/cuisine - INFO - ------------------End of Get Recipes By All Cusine Types---------------
+flask_restx.namespace.api/recipes/cuisine - INFO - ------------------Enter get Recipes By All Cusine Types---------------
+flask_restx.namespace.api/recipes/cuisine - INFO - Got Recipes By All Cusine Types successfully
+flask_restx.namespace.api/recipes/cuisine - INFO - ------------------End of Get Recipes By All Cusine Types---------------
+flask_restx.namespace.api/recipes/cuisine - INFO - ------------------Enter get Recipes By All Cusine Types---------------
+flask_restx.namespace.api/recipes/cuisine - INFO - Got Recipes By All Cusine Types successfully
+flask_restx.namespace.api/recipes/cuisine - INFO - ------------------End of Get Recipes By All Cusine Types---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/diet - INFO - ------------------Enter get Recipes By All Diet Types---------------
+flask_restx.namespace.api/recipes/diet - INFO - Get Recipe By Diet success
+flask_restx.namespace.api/recipes/diet - INFO - ------------------End of Get Recipes By All Diet Types---------------
+flask_restx.namespace.api/recipes/diet - INFO - ------------------Enter get Recipes By All Diet Types---------------
+flask_restx.namespace.api/recipes/diet - INFO - Get Recipe By Diet success
+flask_restx.namespace.api/recipes/diet - INFO - ------------------End of Get Recipes By All Diet Types---------------
+flask_restx.namespace.api/recipes/popular - INFO - ------------------Enter get Recipes By Popularity---------------
+flask_restx.namespace.api/recipes/popular - INFO - Get Recipe By Popularity success
+flask_restx.namespace.api/recipes/popular - INFO - ------------------End of Get Recipes By Popularity---------------
+flask_restx.namespace.api/recipes/popular/rating - INFO - ------------------Enter get Recipes By Popularity and RAting Type---------------
+flask_restx.namespace.api/recipes/popular/rating - INFO - Get Recipe By Popularity By Rating success
+flask_restx.namespace.api/recipes/popular/rating - INFO - ------------------End of Get Recipes By Popularity and Rating Type---------------
+flask_restx.namespace.api/recipes/popular/rating - INFO - ------------------Enter get Recipes By Popularity and RAting Type---------------
+flask_restx.namespace.api/recipes/popular/rating - INFO - Get Recipe By Popularity By Rating success
+flask_restx.namespace.api/recipes/popular/rating - INFO - ------------------End of Get Recipes By Popularity and Rating Type---------------
+flask_restx.namespace.api/recipes/popular/review - INFO - ------------------Enter get Recipes By Popularity and Reviews Type---------------
+flask_restx.namespace.api/recipes/popular/review - INFO - Get Recipe By Popularity By Review success
+flask_restx.namespace.api/recipes/popular/review - INFO - ------------------End of Get REcipes By Popularity and Reviews Type---------------
+flask_restx.namespace.api/recipes/popular/review - INFO - ------------------Enter get Recipes By Popularity and Reviews Type---------------
+flask_restx.namespace.api/recipes/popular/review - INFO - Get Recipe By Popularity By Review success
+flask_restx.namespace.api/recipes/popular/review - INFO - ------------------End of Get REcipes By Popularity and Reviews Type---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------Enter get Recipes By Cooking Time---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - Get Recipe By Cooking Time success
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------End of Get REcipes By Cooking Time---------------
+flask_restx.namespace.api/recipes/cookingtime/time - INFO - ------------------Enter Get Recipes By Selected Cooking Time---------------
+flask_restx.namespace.api/recipes/cookingtime/time - INFO - Get Recipe By Selected Cooking Time success
+flask_restx.namespace.api/recipes/cookingtime/time - INFO - ------------------End of Get Recipes By Selected Cooking Time---------------
+flask_restx.namespace.api/recipes/ingredients/type - INFO - ------------------Enter Get Recipes By Selected Ingredient Type---------------
+flask_restx.namespace.api/recipes/ingredients/type - INFO - Get Recipe By Selected Ingredient success
+flask_restx.namespace.api/recipes/ingredients/type - INFO - ------------------End of Get Recipes By Selected Ingredient Type---------------
+flask_restx.namespace.api/recipes/ingredients/type - INFO - ------------------Enter Get Recipes By Selected Ingredient Type---------------
+flask_restx.namespace.api/recipes/ingredients/type - INFO - Get Recipe By Selected Ingredient success
+flask_restx.namespace.api/recipes/ingredients/type - INFO - ------------------End of Get Recipes By Selected Ingredient Type---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/ingredients/frequency - INFO - ------------------Enter get Ingredients FrequencyMap---------------
+flask_restx.namespace.api/ingredients/frequency - INFO - Inserted docuemnt successfully
+flask_restx.namespace.api/ingredients/frequency - INFO - ------------------End of Get Ingredients Frequency Map---------------
+flask_restx.namespace.api/auth/signin - INFO - ------------------Enter SignIn---------------
+flask_restx.namespace.api/auth/signin - INFO - Email or password is valid
+flask_restx.namespace.api/auth/signin - INFO - ------------------End of SignIn---------------
+flask_restx.namespace.api/auth/signout - INFO - ------------------Enter Sign---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - ERROR - Email already exists
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - Inserted docuemnt successfully
+flask_restx.namespace.api/auth/signup - INFO - ------------------End of SignUp---------------

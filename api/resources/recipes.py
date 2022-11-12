@@ -14,7 +14,7 @@ class GetRecipesApi(Resource):
             recipeslst = recipeModel.get_recipes_by_cuisine_type()
             logGetCusines.logger.info("Got Recipes By All Cusine Types successfully")
             logGetCusines.logger.info("------------------End of Get Recipes By All Cusine Types---------------")
-            return {"recipes": json.dumps(recipeslst)}, 200
+            return {"recipes": recipeslst}, 200
         except Exception as ex:
             logGetCusines.logger.error("Error processing the request")
             logGetCusines.logger.error(ex)
@@ -47,7 +47,7 @@ class GetCuisineRecipesApi(Resource):
             recipeslst = recipeModel.get_recipes_by_selected_cuisine_type(csn)
             logGetSelectedCusines.logger.info("Get Selected Recipe By Cusine success")
             logGetSelectedCusines.logger.info("------------------End of Get REcipes By Cusine Type---------------")
-            return {"recipes": json.dumps(recipeslst)}, 200
+            return {"recipes": recipeslst}, 200
         except Exception as ex:
             logGetSelectedCusines.logger.error("Error processing the request")
             # raise ex
@@ -79,7 +79,7 @@ class GetDietRecipesApi(Resource):
             recipeslst = recipeModel.get_recipes_by_diet_type()
             logGetDietRecipes.logger.info("Get Recipe By Diet success")
             logGetDietRecipes.logger.info("------------------End of Get Recipes By All Diet Types---------------")
-            return {"recipes": json.dumps(recipeslst)}, 200
+            return {"recipes": recipeslst}, 200
             # return jsonify({ "error": "Email address already in use" }), 400
 
         except Exception as ex:
@@ -113,7 +113,7 @@ class GetPopularRatedRecipesApi(Resource):
             recipeslst = recipeModel.get_recipes_by_rating(csn)
             logGetPopularRatedRecipes.logger.info("Get Recipe By Popularity By Rating success")
             logGetPopularRatedRecipes.logger.info("------------------End of Get Recipes By Popularity and Rating Type---------------")
-            return {"recipes": json.dumps(recipeslst)}, 200
+            return {"recipes": recipeslst}, 200
         except Exception as ex:
             logGetPopularRatedRecipes.logger.error("Error processing the request")
             logGetPopularRatedRecipes.logger.error(ex)
@@ -147,7 +147,7 @@ class GetPopularReviewedRecipesApi(Resource):
             recipeslst = recipeModel.get_recipes_by_review()
             logGetPopularReviewRecipes.logger.info("Get Recipe By Popularity By Review success")
             logGetPopularReviewRecipes.logger.info("------------------End of Get REcipes By Popularity and Reviews Type---------------")
-            return {"recipes": json.dumps(recipeslst)}, 200
+            return {"recipes": recipeslst}, 200
         except Exception as ex:
             logGetPopularReviewRecipes.logger.error("Error processing the request")
             logGetPopularReviewRecipes.logger.error(ex)
@@ -162,7 +162,7 @@ class GetRecipesByCookingTimeApi(Resource):
             recipeslst = recipeModel.get_recipes_by_cooking_time()
             logGetCookingRecipes.logger.info("Get Recipe By Cooking Time success")
             logGetCookingRecipes.logger.info("------------------End of Get REcipes By Cooking Time---------------")
-            return {"recipes": json.dumps(recipeslst)}, 200
+            return {"recipes": recipeslst}, 200
         except Exception as ex:
             logGetCookingRecipes.logger.error("Error processing the request")
             # raise ex
@@ -178,7 +178,7 @@ class GetRecipesBySelectedCookingTimeApi(Resource):
             recipeslst = recipeModel.get_recipes_by_selected_cooking_time(ct)
             logGetSelectedCookingRecipes.logger.info("Get Recipe By Selected Cooking Time success")
             logGetSelectedCookingRecipes.logger.info("------------------End of Get Recipes By Selected Cooking Time---------------")
-            return {"recipes": json.dumps(recipeslst)}, 200
+            return {"recipes": recipeslst}, 200
         except Exception as ex:
             logGetSelectedCookingRecipes.logger.error("Error processing the request")
             # raise ex
@@ -195,7 +195,7 @@ class GetRecipesByIngredientApi(Resource):
             recipeslst = recipeModel.get_recipes_by_selected_ingredient(ct)
             logGetSelectedIngredRecipes.logger.info("Get Recipe By Selected Ingredient success")
             logGetSelectedIngredRecipes.logger.info("------------------End of Get Recipes By Selected Ingredient Type---------------")
-            return {"recipes": json.dumps(recipeslst)}, 200
+            return {"recipes": recipeslst}, 200
         except Exception as ex:
             logGetSelectedIngredRecipes.logger.error("Error processing the request")
             logGetSelectedIngredRecipes.logger.error(ex)
@@ -261,7 +261,7 @@ class SearchRecipesApi(Resource):
             recipeslst = recipeModel.get_recipes_by_title(title)
             logSearchRecipe.logger.info("Searched docuemnt successfully")
             logSearchRecipe.logger.info("------------------End of Search Recipes By Title---------------")
-            return {'recipes': json.dumps(recipeslst)}, 200
+            return {'recipes': recipeslst}, 200
         except Exception as ex:
             logSearchRecipe.logger.error("Error processing the request")
             # raise ex
