@@ -1,0 +1,25 @@
+[packages]
+flask = "*"
+flasgger = "*"
+flask_marshmallow = "*"
+apispec = "*"
+python-dotenv = "*"
+pymongo = "*"
+passlib = "*"
+flask_bcrypt = "*"
+flask_jwt_extended = "*"
+flask_mail = "*"
+flask_restful="*"
+flask_restx = "*"
+scikit-learn = "*"
+flask-cors = "*"
+numpy = "*"
+pandas = "*"
+surprise = "*"
+[dev-packages]
+
+[requires]
+python_version = "*"
+
+[pipenv]
+allow_prereleases = true
