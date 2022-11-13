@@ -2160,3 +2160,9 @@ flask_restx.namespace.api/auth/signup - ERROR - Email already exists
 flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
 flask_restx.namespace.api/auth/signup - INFO - Inserted docuemnt successfully
 flask_restx.namespace.api/auth/signup - INFO - ------------------End of SignUp---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - Get Recipe By Selected Ingredients success
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------End of Get REcipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - Get Recipe By Selected Ingredients success
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------End of Get REcipes By Ingredients List---------------

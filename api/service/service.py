@@ -1,27 +1,27 @@
 from api.database.db import db
-from flask import Flask, request, render_template
-from surprise import dump 
-from pymongo import MongoClient
-from sklearn.metrics import pairwise_distances
-from sklearn.feature_extraction.text import TfidfTransformer, TfidfVectorizer
-import numpy as np
-import pandas as pd
-import pickle
-import os
+# from flask import Flask, request, render_template
+# from surprise import dump 
+# from pymongo import MongoClient
+# from sklearn.metrics import pairwise_distances
+# from sklearn.feature_extraction.text import TfidfTransformer, TfidfVectorizer
+# import numpy as np
+# import pandas as pd
+# import pickle
+# import os
 
 #df = pd.read_csv('../recipe_dataset.csv', header = 0)
-df = pd.read_csv('~/Downloads/recipe_dataset.csv', header = 0)
+#df = pd.read_csv('~/Downloads/recipe_dataset.csv', header = 0)
 #df = db.recipe_dataset.find()
 
-df_search = df.copy()
-df_search = df_search.drop_duplicates(subset="recipe_id")
-tfidf_title_vectorizer = TfidfVectorizer()
-tfidf_title_features = tfidf_title_vectorizer.fit_transform(df_search['ingredients'])
+# df_search = df.copy()
+# df_search = df_search.drop_duplicates(subset="recipe_id")
+# tfidf_title_vectorizer = TfidfVectorizer()
+# tfidf_title_features = tfidf_title_vectorizer.fit_transform(df_search['ingredients'])
 
 # Load both models (tfidf not used as of now)
-tfidf_vectorizer = pickle.load(open(os.path.expanduser("~/Downloads/tfidf_vectorizer.pkl"), 'rb'))
-tfidf_feature = pickle.load(open(os.path.expanduser("~/Downloads/tfidf_feature.pkl"), "rb"))
-collaborative_filtering_model = dump.load(os.path.expanduser('~/Downloads/model.pkl'))
+# tfidf_vectorizer = pickle.load(open(os.path.expanduser("~/Downloads/tfidf_vectorizer.pkl"), 'rb'))
+# tfidf_feature = pickle.load(open(os.path.expanduser("~/Downloads/tfidf_feature.pkl"), "rb"))
+# collaborative_filtering_model = dump.load(os.path.expanduser('~/Downloads/model.pkl'))
 # tfidf_vectorizer = pickle.load(open('~/tfidf_vectorizer.pkl', 'rb'))
 # tfidf_feature = pickle.load(open('~/tfidf_feature.pkl', "rb"))
 # collaborative_filtering_model = dump.load('../models/model.pkl')  
@@ -121,64 +121,64 @@ class Service:
     def delete(self, id):
         return self.db.delete(id, self.collection_name)
 
-    def find_matching_vegan(Self,colelction):
-        print("ia msfndfdj")
-        column_output = ['recipe_id','title','ingredients','recipe_tags']
-        vegan_recipes = df[df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False)
-        return vegan_recipes.to_dict('records')
+    # def find_matching_vegan(Self,colelction):
+    #     print("ia msfndfdj")
+    #     column_output = ['recipe_id','title','ingredients','recipe_tags']
+    #     vegan_recipes = df[df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False)
+    #     return vegan_recipes.to_dict('records')
 
-    def find_matching_non_vegan(Self,colelction):
-        column_output = ['recipe_id','title','ingredients','recipe_tags']
-        nonvegan_recipes = df[~df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
-        return nonvegan_recipes.to_dict('records')
+    # def find_matching_non_vegan(Self,colelction):
+    #     column_output = ['recipe_id','title','ingredients','recipe_tags']
+    #     nonvegan_recipes = df[~df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
+    #     return nonvegan_recipes.to_dict('records')
 
-    def run_tfidf(self,input_ner, num_results):
-        """
-            Runs cosine similarity, comparing user input of words to dataframe vector.
-            Returns:
-                dataframe indexes of recipes with closest pairwise distances
-        """
-        input_vector = tfidf_title_vectorizer.transform(pd.Series(input_ner))
-        pairwise_dist = pairwise_distances(tfidf_title_features, input_vector)
-        indices = np.argsort(pairwise_dist.flatten())[0:num_results]
-        
-        #pdists will store the 9 smallest distances
-        pdists  = np.sort(pairwise_dist.flatten())[0:num_results]
-        
-        #data frame indices of the 9 smallest distace's
-        df_indices = list(df_search.index[indices])
-
-        return df_indices  
-
-    def search(self,ingredients):
+    # def run_tfidf(self,input_ner, num_results):
     #     """
-    #         GET api for searching for recipes. Runs both models (tfidf first then collaborative filtering)
+    #         Runs cosine similarity, comparing user input of words to dataframe vector.
     #         Returns:
-    #             list of recipes
+    #             dataframe indexes of recipes with closest pairwise distances
     #     """
-        #indices = self.run_tfidf("['brown sugar', ' milk', ' vanilla', ' nuts', ' butter', ' bite size shredded rice biscuits']", 20)
-        ings = '['
-        for indx,i in enumerate(ingredients):
-            ings+="'"+str(i)+"'"
-            
-            if(indx!=len(ingredients)-1):
-                ings+=','
+    #     input_vector = tfidf_title_vectorizer.transform(pd.Series(input_ner))
+    #     pairwise_dist = pairwise_distances(tfidf_title_features, input_vector)
+    #     indices = np.argsort(pairwise_dist.flatten())[0:num_results]
         
-        ings +=']'
-        #print("ings"+ings)
-        #ingres = ings
-        indices = self.run_tfidf(ings, 20)
-        str_indices = [str(x) for x in indices]
-        recipes = list(db.recipe_dataset.find( { "" : { "$in" : str_indices } } ) )
+    #     #pdists will store the 9 smallest distances
+    #     pdists  = np.sort(pairwise_dist.flatten())[0:num_results]
+        
+    #     #data frame indices of the 9 smallest distace's
+    #     df_indices = list(df_search.index[indices])
 
-        rating_df = pd.DataFrame(recipes)
-        #print(rating_df)
-        rating_df['estimate_rating'] = rating_df['recipe_id'].apply(lambda x: collaborative_filtering_model[1].predict(4470, x).est)
-        rating_df = rating_df.drop_duplicates(subset="recipe_id")
-        rating_df = rating_df.sort_values('estimate_rating', ascending=False)
-        print("result of search tfidf")
-        #print(rating_df.to_dict('records'))
-        return rating_df.to_dict('records')
+    #     return df_indices  
+
+    # def search(self,ingredients):
+    # #     """
+    # #         GET api for searching for recipes. Runs both models (tfidf first then collaborative filtering)
+    # #         Returns:
+    # #             list of recipes
+    # #     """
+    #     #indices = self.run_tfidf("['brown sugar', ' milk', ' vanilla', ' nuts', ' butter', ' bite size shredded rice biscuits']", 20)
+    #     ings = '['
+    #     for indx,i in enumerate(ingredients):
+    #         ings+="'"+str(i)+"'"
+            
+    #         if(indx!=len(ingredients)-1):
+    #             ings+=','
+        
+    #     ings +=']'
+    #     #print("ings"+ings)
+    #     #ingres = ings
+    #     indices = self.run_tfidf(ings, 20)
+    #     str_indices = [str(x) for x in indices]
+    #     recipes = list(db.recipe_dataset.find( { "" : { "$in" : str_indices } } ) )
+
+    #     rating_df = pd.DataFrame(recipes)
+    #     #print(rating_df)
+    #     rating_df['estimate_rating'] = rating_df['recipe_id'].apply(lambda x: collaborative_filtering_model[1].predict(4470, x).est)
+    #     rating_df = rating_df.drop_duplicates(subset="recipe_id")
+    #     rating_df = rating_df.sort_values('estimate_rating', ascending=False)
+    #     print("result of search tfidf")
+    #     #print(rating_df.to_dict('records'))
+    #     return rating_df.to_dict('records')
          # return render_template('index.html', recipes=rating_df.to_dict('records'))
 
      
