@@ -39,7 +39,7 @@ class GetSelectedRecipeApi(Resource):
 
 
 class GetCuisineRecipesApi(Resource):
-    def get(self):
+    def post(self):
         try:
             logGetSelectedCusines.logger.info("------------------Enter get REcipes By Cusine Type---------------")
             rcp = request.get_json()
