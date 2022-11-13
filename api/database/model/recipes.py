@@ -304,9 +304,9 @@ class RecipeModel:
         
         def get_recipes_by_selected_ingredients(self,ingredients):
             ser = Service(self.collection_name)
-            #query = {"ingredients":{"$exists":ingredients}}
-            #res =  ser.find_matching(self.collection_name,query)
-            res = ser.search(ingredients)
+            query = {"ingredients":{"$exists":ingredients}}
+            res =  ser.find_matching(self.collection_name,query)
+            #res = ser.search(ingredients)
             #return res
             lst = []
             for recipe in res:

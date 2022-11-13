@@ -15,6 +15,7 @@ scikit-learn = "*"
 flask-cors = "*"
 numpy = "*"
 pandas = "*"
+scikit-surprise="*"
 surprise = "*"
 [dev-packages]
 
