@@ -45,6 +45,7 @@ class GetCuisineRecipesApi(Resource):
             rcp = request.get_json()
             csn = rcp.get('cuisine')
             recipeslst = recipeModel.get_recipes_by_selected_cuisine_type(csn)
+            print("cuisine set")
             logGetSelectedCusines.logger.info("Get Selected Recipe By Cusine success")
             logGetSelectedCusines.logger.info("------------------End of Get REcipes By Cusine Type---------------")
             return {"recipes": recipeslst}, 200

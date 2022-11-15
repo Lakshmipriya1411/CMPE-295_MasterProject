@@ -31,7 +31,9 @@ class RecipeModel:
                 lstitem['n_directions']= recipe['n_directions'] if 'n_directions' in recipe else ''
                 lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''
                 lstitem['description'] = recipe['description'] if 'description' in recipe else ''
-                lstitem['ingredients'] = recipe['ingredients']
+                lstitem['ingredients'] = recipe['ingredients'] if 'ingredients' in recipe else ''
+                lstitem['user_rating'] = recipe['user_rating'] if 'user_rating' in recipe else ''
+                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 lst.append(lstitem)
             
             return lst
@@ -40,11 +42,19 @@ class RecipeModel:
             #print("yes here")
             #cuisines = ['american', 'canadian', 'european', 'italian', 'mexican', 'thai', 'chinese', 'african', 'indian', 'french', 'greek' ]
             ser = Service(self.collection_name)
-            query = {"recipe_tags":{"$exists":cuisine}}
-            res =  ser.find_matching(self.collection_name,query)
+            #query = {"recipe_tags":{"$exists":cuisine}}
+            #query = { tags: "red" } )
 
+            res =  ser.find_matching_cuisine(self.collection_name,cuisine)
+            print("res")
+            #print(res[0])
+            #del res['_id']
+            result = list(map(dict, set(tuple(sorted(sub.items())) for sub in res)))
+            
+            #return result
+            #print(res)
             lst = []
-            for recipe in res:
+            for recipe in result:
                 lstitem = {}
                 lstitem['id'] = str(recipe['_id']) if '_id' in recipe else ''
                 lstitem['title'] = recipe['title'] if 'title' in recipe else ''
@@ -57,6 +67,8 @@ class RecipeModel:
                 lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''
                 lstitem['description'] = recipe['description'] if 'description' in recipe else ''
                 lstitem['ingredients'] = recipe['ingredients']
+                lstitem['user_rating'] = recipe['user_rating'] if 'user_rating' in recipe else ''
+                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 lst.append(lstitem)
             
             return lst
@@ -78,6 +90,7 @@ class RecipeModel:
             lstitem['description'] = recipe['description'] if 'description' in recipe else ''
             lstitem['rating'] = recipe['user_rating'] if 'user_rating' in recipe else ''
             lstitem['ingredients'] = ast.literal_eval(recipe['ingredients'])
+            lstitem['image'] = recipe['image'] if 'image' in recipe else ''
             return lstitem
 
         def get_recipes_by_diet_type(self):
@@ -100,6 +113,8 @@ class RecipeModel:
                 lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''
                 lstitem['description'] = recipe['description'] if 'description' in recipe else ''
                 lstitem['ingredients'] = recipe['ingredients']
+                lstitem['user_rating'] = recipe['user_rating'] if 'user_rating' in recipe else ''
+                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 lst.append(lstitem)
             
             return lst
@@ -123,6 +138,8 @@ class RecipeModel:
                 lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''
                 lstitem['description'] = recipe['description'] if 'description' in recipe else ''
                 lstitem['ingredients'] = recipe['ingredients']
+                lstitem['user_rating'] = recipe['user_rating'] if 'user_rating' in recipe else ''
+                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 lst.append(lstitem)
             
             return lst
@@ -144,7 +161,7 @@ class RecipeModel:
                 #print(recipe['id'])
                 lstitem['_id'] = str(recipe['id']) if 'id' in recipe else ''
                 lstitem['title'] = recipe['title'] if 'title' in recipe else ''
-                lstitem['mins'] = recipe['minutes'] if 'minutes' in recipe else ''
+                lstitem['mins'] = recipe['mins'] if 'mins' in recipe else ''
                 lstitem['contributor_id'] = recipe['contributor_id'] if 'contributor_id' in recipe else ''
                 lstitem['recipe_submitted_date'] = recipe['recipe_submitted_date'] if 'recipe_submitted_date' in recipe else ''
                 lstitem['recipe_tags'] = recipe['recipe_tags'] if 'recipe_tags' in recipe else ''
@@ -152,8 +169,9 @@ class RecipeModel:
                 lstitem['n_directions']= recipe['n_directions'] if 'n_directions' in recipe else ''
                 lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''
                 lstitem['description'] = recipe['description'] if 'description' in recipe else ''
-                lstitem['rating'] = recipe.get("user_rating") if 'user_rating' in recipe else ''
+                lstitem['rating'] = recipe["rating"] if 'rating' in recipe else ''
                 lstitem['ingredients'] = recipe['ingredients']
+                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 #lst.append(lstitem)
             #print("in modedl res")
             #print(res)
@@ -178,7 +196,8 @@ class RecipeModel:
             lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''
             lstitem['description'] = recipe['description'] if 'description' in recipe else ''
             lstitem['ingredients'] = recipe['ingredients']
-      
+            lstitem['rating'] = recipe["user_rating"]
+            lstitem['image'] = recipe['image'] if 'image' in recipe else ''
             return lstitem
         
         def get_recipes_by_rating(self,rating):
@@ -200,6 +219,8 @@ class RecipeModel:
                 lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''
                 lstitem['description'] = recipe['description'] if 'description' in recipe else ''
                 lstitem['ingredients'] = recipe['ingredients']
+                lstitem['user_rating'] = recipe['user_rating'] if 'user_rating' in recipe else ''
+                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 lst.append(lstitem)
             
             return lst
@@ -225,6 +246,8 @@ class RecipeModel:
                 lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''
                 lstitem['description'] = recipe['description'] if 'description' in recipe else ''
                 lstitem['ingredients'] = recipe['ingredients']
+                lstitem['user_rating'] = recipe['user_rating'] if 'user_rating' in recipe else ''
+                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 #lst.append(lstitem)
             #"in modedl res")
             #print(res)
@@ -275,6 +298,8 @@ class RecipeModel:
                 lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''
                 lstitem['description'] = recipe['description'] if 'description' in recipe else ''
                 lstitem['ingredients'] = recipe['ingredients']
+                lstitem['user_rating'] = recipe['user_rating'] if 'user_rating' in recipe else ''
+                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 lst.append(lstitem)
             
             return lst    
@@ -298,6 +323,8 @@ class RecipeModel:
                 lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''
                 lstitem['description'] = recipe['description'] if 'description' in recipe else ''
                 lstitem['ingredients'] = recipe['ingredients']
+                lstitem['user_rating'] = recipe['user_rating'] if 'user_rating' in recipe else ''
+                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 lst.append(lstitem)
             
             return lst  
@@ -324,6 +351,7 @@ class RecipeModel:
                 lstitem['rating'] = recipe.get("user_rating") if 'user_rating' in recipe else ''
                 lstitem['review'] = recipe.get("user_review") if 'user_review' in recipe else ''
                 lstitem['ingredients'] = recipe['ingredients']
+                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 lst.append(lstitem)
             
             return lst  
@@ -357,6 +385,7 @@ class RecipeModel:
                 lstitem['ingredients'] = recipe['ingredients']
                 lstitem['rating'] = recipe.get("user_rating") if 'user_rating' in recipe else ''
                 lstitem['review'] = recipe.get("user_review") if 'user_review' in recipe else ''
+                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 lst.append(lstitem)
             
             return lst    
@@ -382,6 +411,7 @@ class RecipeModel:
                 lstitem['ingredients'] = recipe['ingredients']
                 lstitem['rating'] = recipe.get("user_rating") if 'user_rating' in recipe else ''
                 lstitem['review'] = recipe.get("user_review") if 'user_review' in recipe else ''
+                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 lst.append(lstitem)
             
             return lst   
