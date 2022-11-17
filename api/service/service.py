@@ -120,6 +120,9 @@ class Service:
 
     def delete(self, id):
         return self.db.delete(id, self.collection_name)
+    
+    def find_matching_cuisine(self,collection,cuisine):
+        return db.recipe_dataset.find({"recipe_tags":{"$regex":cuisine}}).limit(50)
 
     # def find_matching_vegan(Self,colelction):
     #     print("ia msfndfdj")
