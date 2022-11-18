@@ -53,6 +53,7 @@ export default class RecipeDetails extends Component {
     componentDidMount() {
         const url = 'http://127.0.0.1:5000/api/recipes/cuisine';
         const reqBody = {recipe_id: localStorage.getItem('detilsId')}
+        console.log("id "+localStorage.getItem('detilsId'))
         axios.post(url, reqBody)
             .then(response => {
                 const data = response.data;

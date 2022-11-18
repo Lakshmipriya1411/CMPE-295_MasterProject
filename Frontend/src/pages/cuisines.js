@@ -10,7 +10,7 @@ export default class Cuisines extends Component {
                 {name: 'american', image: "https://x.yummlystatic.com/web/bubble/cuisine/american.png"},
                 {name: 'african', image: "https://x.yummlystatic.com/web/bubble/cuisine/italian.png"},
                 {name: 'italian', image: "https://x.yummlystatic.com/web/bubble/cuisine/italian.png"},
-                {name: 'ianadian', image: "https://x.yummlystatic.com/web/bubble/cuisine/southern.png"},
+                {name: 'canadian', image: "https://x.yummlystatic.com/web/bubble/cuisine/southern.png"},
                 {name: 'european', image: "https://x.yummlystatic.com/web/bubble/cuisine/spanish.png"},
                 {name: 'mexican', image: "https://x.yummlystatic.com/web/bubble/cuisine/mexican.png"},
                 {name: 'thai', image: "https://x.yummlystatic.com/web/bubble/cuisine/thai.png"},
@@ -24,8 +24,9 @@ export default class Cuisines extends Component {
     }
 
     handleViewCuisine = (value) => {
-        console.log(value);
-        localStorage.setItem("cuisineDetilsName", value.name);
+        console.log("in handle view cuisine");
+        //console.log(value);
+        //localStorage.setItem("cuisineDetilsName", value.name);
     }
 
     render() {

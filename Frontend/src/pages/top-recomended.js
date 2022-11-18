@@ -15,11 +15,12 @@ export default class TopRecomended extends Component {
     }
 
     componentDidMount() {
+        console.log("comp ,ount ")
         const url = 'http://127.0.0.1:5000/api/recipes/popular';
         axios.get(url)
             .then(response => {
                 const data = response.data;
-                this.setState({popularRecipes: data.recipes.slice(0, 8)});
+                this.setState({popularRecipes: data.recipes.slice(0, 10)});
                 this.setState({isLoading: false});
             })
             .catch(error => {
@@ -30,7 +31,7 @@ export default class TopRecomended extends Component {
 
     handleViewRecipe = (value) => {
         console.log(value);
-        localStorage.setItem("detilsId", value['_id']);
+        localStorage.setItem("detilsId", value['id']);
     }
 
     render() {
@@ -40,7 +41,7 @@ export default class TopRecomended extends Component {
                 <div className="content-header">
                     <div className="pantry-recipe-grid RecipeGrid">
                         <section className="pantry-grid-header">
-                            <h4 className="grid-title h4-text primary-dark font-bold">Top Recomended Recipes</h4>
+                            <h4 className="grid-title h4-text primary-dark font-bold">Popular Recipes</h4>
                         </section>
                         {isLoading ? (
                             <img src="https://flevix.com/wp-content/uploads/2021/08/Preloader.gif" alt=""/>
@@ -80,9 +81,9 @@ export default class TopRecomended extends Component {
                                                         />
                                                     </a>
                                                 </div>
-                                                <div className="card-action no-padding type-add primary-teal">
+                                                {/* <div className="card-action no-padding type-add primary-teal">
                                                     <i className="fa fa-plus-circle font" aria-hidden="true"></i>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </div>
                                     )}

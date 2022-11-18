@@ -42,7 +42,7 @@ export default class Sidebar extends Component {
                             </li>
                             <li className="nav-item user-panel mt-3  d-flex">
                                 <Link to={`/top-recomended`} className="nav-link">
-                                    <p>Top Recomended</p>
+                                    <p>Popular Recipes</p>
                                 </Link>
                             </li>
                             <li className="nav-item user-panel mt-3  d-flex">

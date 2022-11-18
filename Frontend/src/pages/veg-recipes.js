@@ -14,8 +14,9 @@ export default class VegRecipes extends Component {
     }
 
     componentDidMount() {
-        const url = 'http://127.0.0.1:5000/api/recipes/diet/type';
-        axios.post(url, {"diet": "vegetarian"})
+        //const url = 'http://127.0.0.1:5000/api/recipes/diet/type';
+        const url = 'http://127.0.0.1:5000/api/vegan';
+        axios.get(url)
             .then(response => {
                 const data = response.data;
                 this.setState({vegRecipes: data.recipes.slice(0, 10)});
@@ -28,7 +29,8 @@ export default class VegRecipes extends Component {
     }
 
     handleViewRecipe = (value) => {
-        console.log(value);
+        console.log("value");
+        console.log(value.id)
         localStorage.setItem("detilsId", value.id);
     }
 
@@ -68,18 +70,18 @@ export default class VegRecipes extends Component {
                                             <div className="card-info-wrapper flex-row">
                                                 <div className="card-info primary-dark">
                                                     <a className="card-title two-line-truncate p2-text font-normal text-capitalize" title={recipe.title} aria-label={recipe.title} href="#">{recipe.title}</a>
-                                                    <a className="review-stars micro-text" tabIndex="-1" title="Rated 4.17 Out of 5 by Yummly Users" aria-label="Rated 4.17 Out of 5 by Yummly Users" href="#">
+                                                    {/* <a className="review-stars micro-text" tabIndex="-1" title="Rated 4.17 Out of 5 by Yummly Users" aria-label="Rated 4.17 Out of 5 by Yummly Users" href="#">
                                                         <Rating
                                                             placeholderRating={recipe.rating}
                                                             emptySymbol={<img src="http://dreyescat.github.io/react-rating/assets/images/star-grey.png" className="icon"/>}
                                                             placeholderSymbol={<img src="http://dreyescat.github.io/react-rating/assets/images/star-red.png" className="icon"/>}
                                                             fullSymbol={<img src="http://dreyescat.github.io/react-rating/assets/images/star-yellow.png" className="icon"/>}
                                                         />
-                                                    </a>
+                                                    </a> */}
                                                 </div>
-                                                <div className="card-action no-padding type-add primary-teal">
+                                                {/* <div className="card-action no-padding type-add primary-teal">
                                                     <i className="fa fa-plus-circle font" aria-hidden="true"></i>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </div>
                                     )}

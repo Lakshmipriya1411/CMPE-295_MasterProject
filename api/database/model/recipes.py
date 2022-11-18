@@ -4,7 +4,7 @@ from api.service.service import Service
 from bson import ObjectId
 import ast
 from flask import Flask, request, render_template
-
+from random import shuffle
 
 class RecipeModel:
         def __init__(self):
@@ -76,7 +76,16 @@ class RecipeModel:
         def get_selected_recipe_by_id(self,recipe_id):
             ser = Service(self.collection_name)
             #print('find')
-            recipe =  ser.find_one('recipe_dataset','_id',ObjectId(recipe_id))
+            recipe = ''
+            if(len(recipe_id) >= 12):
+                print("hello" +recipe_id)
+                recipe =  ser.find_one('recipe_dataset','_id',ObjectId(recipe_id))
+               
+            else:
+                print("hello in else" +recipe_id)
+                recipe =  ser.find_one('recipe_dataset','recipe_id',recipe_id)
+
+            print(recipe)
             lstitem = {}
             lstitem['id'] = str(recipe['_id']) if '_id' in recipe else ''
             lstitem['title'] = recipe['title'] if 'title' in recipe else ''
@@ -160,6 +169,7 @@ class RecipeModel:
                 recipe = self.get_recipes_by_title(lstitem["_id"])
                 #print(recipe['id'])
                 lstitem['_id'] = str(recipe['id']) if 'id' in recipe else ''
+                lstitem['id'] = recipe['recipe_id'] if 'recipe_id' in recipe else ''
                 lstitem['title'] = recipe['title'] if 'title' in recipe else ''
                 lstitem['mins'] = recipe['mins'] if 'mins' in recipe else ''
                 lstitem['contributor_id'] = recipe['contributor_id'] if 'contributor_id' in recipe else ''
@@ -175,7 +185,16 @@ class RecipeModel:
                 #lst.append(lstitem)
             #print("in modedl res")
             #print(res)
-            return res
+            results = []
+
+            for re in res:
+                print(re)
+                if(re['rating'] == "5"):
+                    results.append(re)
+
+            shuffle(results)
+
+            return results
 
         def get_recipes_by_title(self,title):
             #print("title")
@@ -188,6 +207,7 @@ class RecipeModel:
             lstitem['id'] = str(recipe['_id']) if '_id' in recipe else ''
             lstitem['title'] = recipe['title'] if 'title' in recipe else ''
             lstitem['mins'] = recipe['minutes'] if 'minutes' in recipe else ''
+            lstitem['recipe_id'] = recipe['recipe_id'] if 'recipe_id' in recipe else ''
             lstitem['contributor_id'] = recipe['contributor_id'] if 'contributor_id' in recipe else ''
             lstitem['recipe_submitted_date'] = recipe['recipe_submitted_date'] if 'recipe_submitted_date' in recipe else ''
             lstitem['recipe_tags'] = recipe['recipe_tags'] if 'recipe_tags' in recipe else ''
@@ -372,7 +392,9 @@ class RecipeModel:
             lst = []
             for recipe in res:
                 lstitem = {}
-                lstitem['id'] = str(recipe['_id']) if '_id' in recipe else ''
+                #print(recipe)
+                result  = ser.find_one(self.collection_name,"title",recipe['title'])
+                lstitem['id'] = str(recipe['recipe_id']) if 'recipe_id' in recipe else ''
                 lstitem['title'] = recipe['title'] if 'title' in recipe else ''
                 lstitem['mins'] = recipe['minutes'] if 'minutes' in recipe else ''
                 lstitem['contributor_id'] = recipe['contributor_id'] if 'contributor_id' in recipe else ''
@@ -385,7 +407,8 @@ class RecipeModel:
                 lstitem['ingredients'] = recipe['ingredients']
                 lstitem['rating'] = recipe.get("user_rating") if 'user_rating' in recipe else ''
                 lstitem['review'] = recipe.get("user_review") if 'user_review' in recipe else ''
-                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
+                lstitem['image'] = result['image'] if 'image' in result else ''
+                #print(lstitem['image'])
                 lst.append(lstitem)
             
             return lst    
@@ -398,7 +421,8 @@ class RecipeModel:
             lst = []
             for recipe in res:
                 lstitem = {}
-                lstitem['id'] = str(recipe['_id']) if '_id' in recipe else ''
+                result  = ser.find_one(self.collection_name,"title",recipe['title'])
+                lstitem['id'] = str(recipe['recipe_id']) if 'recipe_id' in recipe else ''
                 lstitem['title'] = recipe['title'] if 'title' in recipe else ''
                 lstitem['mins'] = recipe['minutes'] if 'minutes' in recipe else ''
                 lstitem['contributor_id'] = recipe['contributor_id'] if 'contributor_id' in recipe else ''
@@ -411,7 +435,7 @@ class RecipeModel:
                 lstitem['ingredients'] = recipe['ingredients']
                 lstitem['rating'] = recipe.get("user_rating") if 'user_rating' in recipe else ''
                 lstitem['review'] = recipe.get("user_review") if 'user_review' in recipe else ''
-                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
+                lstitem['image'] = result['image'] if 'image' in result else ''               
                 lst.append(lstitem)
             
             return lst   
