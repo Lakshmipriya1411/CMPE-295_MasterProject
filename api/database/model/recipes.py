@@ -6,6 +6,7 @@ import ast
 from flask import Flask, request, render_template
 from random import shuffle
 
+
 class RecipeModel:
         def __init__(self):
             self.db = db
@@ -188,7 +189,7 @@ class RecipeModel:
             results = []
 
             for re in res:
-                print(re)
+                #print(re)
                 if(re['rating'] == "5"):
                     results.append(re)
 
@@ -349,12 +350,12 @@ class RecipeModel:
             
             return lst  
         
-        def get_recipes_by_selected_ingredients(self,ingredients):
+        def get_recipes_by_selected_ingredients(self,ingredients,token):
             ser = Service(self.collection_name)
             query = {"ingredients":{"$exists":ingredients}}
-            res =  ser.find_matching(self.collection_name,query)
-            #res = ser.search(ingredients)
-            #return res
+            u = db.user_dataset.find_one({'access_token':token})
+            res = ser.search(ingredients,u['user_id'])
+            #import pdb;pdb.set_trace()
             lst = []
             for recipe in res:
                 lstitem = {}
@@ -374,7 +375,8 @@ class RecipeModel:
                 lstitem['image'] = recipe['image'] if 'image' in recipe else ''
                 lst.append(lstitem)
             
-            return lst  
+            #print(lst)
+            return lst
         
         def update_rating(self,recipe):
             ser = Service(self.collection_name)

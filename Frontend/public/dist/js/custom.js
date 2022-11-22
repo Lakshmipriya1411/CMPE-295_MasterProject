@@ -1,11 +1,20 @@
 $(document).ready(function () {
     $(document).on('focus', ".ingredient-suggest-input", function (event) {
+      
         if (event.target.value.length === 0) {
+        
             $('.ingredient-suggest-input').parents(':eq(1)').addClass('active');
             $('.fa-plus-circle').addClass('fa-search').removeClass("fa-plus-circle");
             $(".fa-times-circle").show()
         }
     });
+    // $(document).on('click',".content-wrapper",function(event){
+    //     if($(event.target).is("div")) {
+    //         $('.ingredient-suggest-input').parents(':eq(1)').removeClass('active');
+    //         $('.pantry-ingredient-list-wrapper').css('padding-top','25px');
+    //     }
+
+    // });
     $(document).on('keyup', ".ingredient-suggest-input", function (event) {
         if (event.target.value.length > 0) {
             $("#react-autowhatever-2").removeClass("hidden");

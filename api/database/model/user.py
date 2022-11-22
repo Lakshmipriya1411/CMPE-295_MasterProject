@@ -75,17 +75,17 @@ class UserModel:
             return ser.find_one_email('user_email',email)
 
         def save_access_token(self,token,user):
-            #print('token')
-            #print(user)
+            print('token')
+            print(user)
             ser = Service(self.collection_name)
-            # user['access_token'] = token
+            #user['access_token'] = token
             # user['log_in_time'] = datetime.datetime.now()
-            #print(user)
+            print(token)
             myquery = { "_id": ObjectId(user['_id']) }
            
             newvalues = { "$set": { "access_token": token,"log_in_time":datetime.datetime.now() } }
 
-            return ser.update(myquery,newvalues)
+            return ser.update_user(myquery,newvalues)
       
         def find(self, todo):  # find all
             return self.db.find(todo, self.collection_name)

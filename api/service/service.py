@@ -8,12 +8,20 @@ import numpy as np
 import pandas as pd
 import pickle
 import os
+import time
+from io import StringIO
 
 
 #df = pd.read_csv('../recipe_dataset.csv', header = 0)
-df = pd.read_csv('~/Downloads/recipe_dataset.csv', header = 0)
-#df = db.recipe_dataset.find()
-
+#df = pd.read_csv('~/Downloads/recipe_dataset.csv', header = 0)
+df = pd.read_csv('~/Downloads/recipe_dataset_new.csv',header=0)
+# data = db.recipe_dataset.find()
+# df = pd.DataFrame.from_dict(data)
+print(df.tail(4))
+# coll = db.recipe_dataset
+# raw_coll = coll.with_options(codec_options=coll.codec_options.with_options(document_class=RawBSONDocument))
+# data = raw_coll.find()
+# df = pd.DataFrame.from_dict(data)
 df_search = df.copy()
 df_search = df_search.drop_duplicates(subset="recipe_id")
 tfidf_title_vectorizer = TfidfVectorizer()
@@ -41,12 +49,88 @@ class Service:
         #print(res.inserted_id)
         #db.user_dataset.insert_one(user)
         return "Inserted Id " + str(res.inserted_id)
-    
+    def get_list_string(self,values):
+        ings = '['
+        for indx,i in enumerate(values):
+            ings+="'"+str(i)+"'"
+            
+            if(indx!=len(values)-1):
+                ings+=','
+        
+        ings +=']'
+        return ings
+
     def insert_recipe(self,object):
-        res = db.recipe_dataset.insert_one(object)
-        #print(res.inserted_id)
-        #db.user_dataset.insert_one(user)
-        return "Inserted Id " + str(res.inserted_id)
+        df.to_csv('~/Downloads/recipe_dataset1.csv')
+        user = db.user.find_one({'access_token':object['user_token']})
+        #print(object)
+        recipe = db.recipe_dataset.find_one({'title':object['title']})
+        unnamed_id = int(df.tail(1)['Unnamed: 0']) +1
+        print("un ")
+        # if that user alrdy rated the app
+        rated_recipe = db.recipe_dataset.find_one({'title':object['title'],'user_id':user['user_id']})
+        print("2")
+        recipe_tags = self.get_list_string(object['recipe_tags'])
+        print("3")
+        print(rated_recipe)
+        recipe_obj = {
+            "":str(unnamed_id),
+            "title": recipe['title'],
+            "minutes": recipe['minutes'],
+            "contributor_id": recipe['contributor_id'],
+            "recipe_submitted_date": recipe['recipe_submitted_date'],
+            "recipe_tags": recipe['recipe_tags'],
+            "nutrition": recipe['nutrition'],
+            "n_directions": recipe['n_directions'],
+            "directions":recipe['directions'],
+            "description": recipe['description'],
+            "ingredients": recipe['ingredients'],
+            "n_ingredients": recipe['n_ingredients'],
+            "user_id": user['user_id'],
+            "recipe_id": recipe['recipe_id'],
+            "date": recipe['date'],
+            "user_rating": str(object['user_rating']),
+            "user_review": ''
+            }
+        print("4")
+        if not rated_recipe:
+            res = db.recipe_dataset.insert_one(recipe_obj)
+        else:
+            print("in else'")
+            myquery = { "title": object['title'],'user_id':user['user_id']}  
+            newvalues = { "$set": { "user_rating": object['user_rating'] } }
+            res = self.update(myquery,newvalues)
+      
+        print("5")
+        df_new = df.iloc[0].copy(deep=True)
+        #print(df_new)
+        #print(df.dtypes)
+        
+        #df_new['Unnamed: 0']= unnamed_id
+        df_new['title'] = object['title']
+        df_new['minutes'] = int(object['mins'])
+        df_new['contributor_id'] = int(object['contributor_id'])
+        df_new['recipe_submitted_date'] = object['recipe_submitted_date']
+        df_new['recipe_tags'] = recipe_tags
+        df_new['nutrition'] = object['nutrition']
+        df_new['n_directions'] = int(object['n_directions'])
+        df_new['directions'] = self.get_list_string(object['directions'])
+        df_new['description'] = object['description']
+        df_new['ingredients'] = recipe['ingredients']
+        df_new['n_ingredients'] = int(object['ingredientsCount'])
+        df_new['user_id'] = int(user['user_id']) if 'user_id'in user else ''
+        df_new['recipe_id'] = int(recipe['recipe_id'])
+        df_new['date']= recipe['date']
+        df_new['user_rating'] = int(object['user_rating'])
+        df_new['user_review'] = ""
+     
+        print("6")
+        df.loc[len(df.index)] = df_new
+        df_search.loc[len(df.index)] = df_new
+        print(df.tail(2))
+        df.to_csv('~/Downloads/recipe_dataset_new.csv',index=False)
+
+        return "Successfully updated the record"
 
     def find_ingreds(self,collectioname):  # find all
         #print("am here")
@@ -109,6 +193,7 @@ class Service:
         return self.db.find_one({ field: value })
 
     def find_one_email(self,field,value):
+        print("isuue here")
         return self.db.find_one({ field: value })
 #             return jsonify({ "error": "Email address already in use" }), 400
     def find_one(self,collection,field,value):
@@ -116,6 +201,9 @@ class Service:
 
     def find_by_id(self, id):
         return self.db.find_by_id(id)
+
+    def update_user(self,query,newValues):
+        return self.db.update_one(query,newValues)
 
     def update(self,query,newvalues):
         return db.recipe_dataset.update_one(query, newvalues)
@@ -128,12 +216,14 @@ class Service:
         return db.recipe_dataset.find({"recipe_tags":{"$regex":cuisine}}).limit(50)
 
     def find_matching_vegan(Self,colelction):
-        print("ia msfndfdj")
+        print(df.tail(2))
         column_output = ['recipe_id','title','ingredients','recipe_tags']
         vegan_recipes = df[df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
+        #print(vegan_recipes)
         return vegan_recipes.to_dict('records')
 
     def find_matching_non_vegan(Self,colelction):
+        print(df.tail(2))
         column_output = ['recipe_id','title','ingredients','recipe_tags']
         nonvegan_recipes = df[~df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
         return nonvegan_recipes.to_dict('records')
@@ -156,7 +246,7 @@ class Service:
 
         return df_indices  
 
-    def search(self,ingredients):
+    def search(self,ingredients,user_id):
     #     """
     #         GET api for searching for recipes. Runs both models (tfidf first then collaborative filtering)
     #         Returns:
@@ -171,18 +261,17 @@ class Service:
                 ings+=','
         
         ings +=']'
-        #print("ings"+ings)
-        #ingres = ings
+        print("user_id"+user_id)
         indices = self.run_tfidf(ings, 20)
         str_indices = [str(x) for x in indices]
         recipes = list(db.recipe_dataset.find( { "" : { "$in" : str_indices } } ) )
-
+       # print(recipes)
         rating_df = pd.DataFrame(recipes)
-        #print(rating_df)
-        rating_df['estimate_rating'] = rating_df['recipe_id'].apply(lambda x: collaborative_filtering_model[1].predict(4470, x).est)
+        rating_df['image'] = rating_df['image'].fillna('')
+        rating_df['estimate_rating'] = rating_df['recipe_id'].apply(lambda x: collaborative_filtering_model[1].predict(user_id, x).est)
+        #print(rating_df.to_dict('records'))
         rating_df = rating_df.drop_duplicates(subset="recipe_id")
         rating_df = rating_df.sort_values('estimate_rating', ascending=False)
-        print("result of search tfidf")
         #print(rating_df.to_dict('records'))
         return rating_df.to_dict('records')
          # return render_template('index.html', recipes=rating_df.to_dict('records'))

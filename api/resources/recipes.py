@@ -4,6 +4,7 @@ from flask_restful import Resource
 from api.logging.logger import logGetCusines, logGetCookingRecipes, logGetRecipeByID, logGetSelectedCusines, logGetSelectedCookingRecipes, logGetCookingRecipes, logGetDietRecipes, logGetIngredRecipes, logGetPopularRatedRecipes, logGetPopularRecipes, logGetPopularReviewRecipes, logGetSelectedDietRecipes, logGetSelectedIngredRecipes
 from api.logging.logger import logUpdateRating, logUpdateReview, logSearchRecipe
 import json
+import ast
 
 recipeModel = recipes.RecipeModel()
 
@@ -209,11 +210,18 @@ class GetRecipesByIngredientsApi(Resource):
         try:
             logGetIngredRecipes.logger.info("------------------Enter Get Recipes By Ingredients List---------------")
             rcp = request.get_json()
+            print("j")
+            print(rcp)
             ct = rcp.get('ingredients')
-            recipeslst = recipeModel.get_recipes_by_selected_ingredients(ct)
+            user = rcp.get('token')
+            recipeslst = recipeModel.get_recipes_by_selected_ingredients(ct,user)
+
             logGetIngredRecipes.logger.info("Get Recipe By Selected Ingredients success")
             logGetIngredRecipes.logger.info("------------------End of Get REcipes By Ingredients List---------------")
-            return {"recipes": recipeslst}, 200
+            #data = {"recipes":recipeslst}
+            #print(data["recipes"])
+             
+            return {"recipes":recipeslst}, 200
         except Exception as ex:
             logGetIngredRecipes.logger.error("Error processing the request")
             logGetIngredRecipes.logger.error(ex)

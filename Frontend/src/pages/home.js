@@ -24,15 +24,25 @@ export default class Home extends Component {
 
 
     handleSearch = () => {
+       
         this.setState({isLoading: true});
         const url = 'http://127.0.0.1:5000/api/recipes/ingredients';
-
-        const payload = {ingredients: this.state.selectedIngredient}
+        const user_token = localStorage.getItem('token');
+        const payload = {ingredients: this.state.selectedIngredient,token:user_token}
         axios.post(url, payload)
-            .then(result => {
-                const data = result.data;
-                this.setState({searchRecipe: data.recipes.slice(0, 8), search: true, isLoading: false}, () => {});
+            .then(response => {
+                const data = response.data;
+                console.log(response);
+                //debugger
+                this.setState({searchRecipe: data.recipes.slice(0, 10), search: true, isLoading: false}, () => {});
+               // this.setState({isLoading: false});
             })
+            // .then(result => {
+               
+            //     const recps = result.data;
+            //     console.log(recps);
+            //     this.setState({searchRecipe: recps.recipes.slice(0, 10), search: true, isLoading: false}, () => {});
+            // })
             .catch(error => {
                 console.log(error);
                 this.setState({authError: true, isLoading: false});
@@ -53,6 +63,7 @@ export default class Home extends Component {
     }
 
     handleAddIngredient = (value) => {
+        console.log("hey am in ingred click");
         const index = this.state.ingredients.indexOf(value)
         if (index !== -1) {
             this.state.ingredients.splice(index, 1);
@@ -105,10 +116,10 @@ export default class Home extends Component {
                                         <div role="combobox" aria-haspopup="listbox" aria-owns="react-autowhatever-1" aria-expanded="false" className="ingredient-suggest-container">
                                             <input type="text" autoComplete="off" aria-autocomplete="list" aria-controls="react-autowhatever-1" className="ingredient-suggest-input p1-text" name="IngredientSuggestInput" onKeyUp={(e) => this.handleLoginKeyUp(e)} placeholder="Enter your ingredients"/>
                                             <div id="react-autowhatever-1" role="listbox" className="suggestion-container">
-                                                <div className="search-bubbles-section">
+                                                <div className="search-bubbles-sections">
                                                     <div className="pantry-suggest-tooltip micro-text font-normal"/>
                                                     {/*<p className="micro-caps font-bold search-bubble-title greyscale-3">Suggested Ingredients</p>*/}
-                                                    <div className="search-bubbles has-gradient" id="pantry-suggested-ingredients">
+                                                    <div className="search-bubbles has-gradient" id="pantry-suggested-ingredientss">
                                                         {this.state.ingredients.map((ingredient, index) =>
                                                             <div key={`${index}key`} className="suggested-ingredient floating button" data-name={ingredient} onClick={() => this.handleAddIngredient(ingredient)}>
                                                                 <span className="ingredient-content">

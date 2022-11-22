@@ -22,10 +22,10 @@ export default class RecipeDetails extends Component {
         console.log(value)
         this.setState({isLoading: true});
         const url = 'http://127.0.0.1:5000/api/recipes/rating';
-        const data = {};
+        const data = this.state.recipeDetils;
         data.user_rating = value;
-        data.user_id = localStorage.getItem('token');
-        data.recipe_id = localStorage.getItem('detilsId');
+        data.user_token = localStorage.getItem('token');
+        //data.recipe_id = localStorage.getItem('detilsId');
         const bodyFormData = {...data}
         console.log(bodyFormData)
         console.log(this.state.recipeDetils)
