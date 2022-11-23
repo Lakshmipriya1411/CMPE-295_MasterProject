@@ -289,6 +289,7 @@ class GetVeganRecipesApi(Resource):
             logGetCookingRecipes.logger.error("Error processing the request")
             # raise ex
             return {'error': 'Error processing the request'}, 400
+            #re_train_model
 
 class GetNonVeganRecipesApi(Resource):
     def get(self):
@@ -301,4 +302,17 @@ class GetNonVeganRecipesApi(Resource):
         except Exception as ex:
             logGetCookingRecipes.logger.error("Error processing the request")
             # raise ex
+            return {'error': 'Error processing the request'}, 400
+
+class ReTrainModelApi(Resource):
+    def get(self):
+        try:
+            logGetCookingRecipes.logger.info("------------------Enter Retrain ML model---------------")
+            recipeModel.re_train_model()
+            logGetCookingRecipes.logger.info("Retrain ML model success")
+            logGetCookingRecipes.logger.info("------------------End of Retrain ML model---------------")
+            return "Re-trained model Successfully", 200
+        except Exception as ex:
+            logGetCookingRecipes.logger.error("Error processing the request")
+            raise ex
             return {'error': 'Error processing the request'}, 400

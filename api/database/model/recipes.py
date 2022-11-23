@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, session, redirect
+from numpy import NaN
 from api.database import db
 from api.service.service import Service
 from bson import ObjectId
@@ -86,6 +87,7 @@ class RecipeModel:
                 print("hello in else" +recipe_id)
                 recipe =  ser.find_one('recipe_dataset','recipe_id',recipe_id)
 
+            print("recipe_id"+str(recipe_id))
             print(recipe)
             lstitem = {}
             lstitem['id'] = str(recipe['_id']) if '_id' in recipe else ''
@@ -356,10 +358,12 @@ class RecipeModel:
             u = db.user_dataset.find_one({'access_token':token})
             res = ser.search(ingredients,u['user_id'])
             #import pdb;pdb.set_trace()
+            import math
+            res = [0 if math.isnan(x) else x for x in res]
             lst = []
             for recipe in res:
                 lstitem = {}
-                lstitem['id'] = str(recipe['_id']) if '_id' in recipe else ''
+                lstitem['id'] = str(recipe['recipe_id']) if 'recipe_id' in recipe else ''
                 lstitem['title'] = recipe['title'] if 'title' in recipe else ''
                 lstitem['mins'] = recipe['minutes'] if 'minutes' in recipe else ''
                 lstitem['contributor_id'] = recipe['contributor_id'] if 'contributor_id' in recipe else ''
@@ -368,7 +372,10 @@ class RecipeModel:
                 lstitem['nutrition'] = recipe['nutrition'] if 'nutrition' in recipe else ''
                 lstitem['n_directions']= recipe['n_directions'] if 'n_directions' in recipe else ''
                 lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''
-                lstitem['description'] = recipe['description'] if 'description' in recipe else ''
+                if recipe['description'] == NaN:
+                    lstitem['description'] = "No Description Found"
+                else:
+                    lstitem['description'] = recipe['description'] if 'description' in recipe else ''
                 lstitem['rating'] = recipe.get("user_rating") if 'user_rating' in recipe else ''
                 lstitem['review'] = recipe.get("user_review") if 'user_review' in recipe else ''
                 lstitem['ingredients'] = recipe['ingredients']
@@ -441,6 +448,11 @@ class RecipeModel:
                 lst.append(lstitem)
             
             return lst   
+
+        def re_train_model(self):
+            ser = Service(self.collection_name)
+            res = ser.train()
+
 
        
 

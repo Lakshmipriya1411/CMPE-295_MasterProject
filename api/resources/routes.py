@@ -2,7 +2,7 @@ from api.resources.auth import SignupApi,SignInApi,SignoutApi
 from api.resources.ingredients import GetingredientsApi,GetIngredientFrequencyMapApi
 from api.resources.recipes import GetRecipesApi,GetSelectedRecipeApi,GetCuisineRecipesApi,GetDietRecipesApi,GetSelectedDietRecipesApi,GetPopularRecipesApi,GetPopularRatedRecipesApi
 from api.resources.recipes import GetPopularReviewedRecipesApi,GetRecipesByCookingTimeApi,GetRecipesBySelectedCookingTimeApi,GetRecipesByIngredientApi,GetRecipesByIngredientsApi
-from api.resources.recipes import UpdateRating,UpdateReview,SearchRecipesApi,GetVeganRecipesApi,GetNonVeganRecipesApi
+from api.resources.recipes import UpdateRating,UpdateReview,SearchRecipesApi,GetVeganRecipesApi,GetNonVeganRecipesApi,ReTrainModelApi
 from http import HTTPStatus
 from flasgger import swag_from
 
@@ -30,4 +30,5 @@ def initialize_routes(api):
     api.add_resource(SearchRecipesApi,'/api/recipe')
     api.add_resource(GetVeganRecipesApi,'/api/vegan')
     api.add_resource(GetNonVeganRecipesApi,'/api/nonvegan')
+    api.add_resource(ReTrainModelApi,"/api/retrain")
     
