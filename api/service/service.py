@@ -226,7 +226,7 @@ class Service:
         ings +=']'
         #print("user_id"+user_id)
         indices = self.run_tfidf(ings, 100)
-        print(indices)
+        #print(indices)
         rating_df = df_search.copy()
         rating_df = rating_df[rating_df.index.isin(indices)]
         rating_df.reset_index()
@@ -244,43 +244,36 @@ class Service:
             if not df.loc[(df['title']==title) & (df['user_id'] == int(user_id))].empty:
                 dg = df.loc[(df['title']==title) & (df['user_id'] == int(user_id))]
                 df1.loc[len(df1.index)] = [int(dg['recipe_id']), int(user_id), int(dg['user_rating'])] 
-        print(df1)
+        #print(df1)
 
         # Step 3. Find matching ingredients in u(ser rating and get those top 5 records
         #cold_start_df = df.query('user_id=='+str(user_id)+"'")
         cold_start_df=df.query("user_id == "+user_id)
         indi = self.tfidf_model_cold_start(ings, 100,cold_start_df)
-        print("ind")
-        print(indi)
+        #print("ind")
+        #print(indi)
         rating_df_cs = df.copy()
         rating_df_cs = rating_df_cs[rating_df_cs.index.isin(indi)]
         rating_df_cs.reset_index()
-        print(rating_df_cs)
+        #print(rating_df_cs)
         dfre_ur = db.recipe_dataset.find({ 'title': { '$in': list(rating_df['title']) } ,'user_id':str(user_id)} )
-        print("DF")
+        #print("DF")
         dfre_df = pd.DataFrame(dfre_ur)
-        print(dfre_df)
+
         if not dfre_df.empty: 
             dfre_con = dfre_df.astype({'recipe_id': 'int64','user_id':'int64','user_rating':'int64'})
             df1_m = dfre_con.filter(items=['recipe_id','user_id', 'user_rating'])
             df1= df1.append(df1_m, ignore_index=True)
-        print("Hhh")
-        #print(df1_m)
-        #print(df1)
-        #print(rating_df)
-        #print(df1)
+     
         self.train(df1)
         rating_df['estimate_rating'] = rating_df['recipe_id'].apply(lambda x: self.collaborative_filtering_model.predict(user_id, x).est)
-        #print(str(rating_df['title'])+": "+str(rating_df['estimate_rating']))
-        #print(rating_df.to_dict('records'))
+
         rating_df = rating_df.drop_duplicates(subset="recipe_id")
         rating_df = rating_df.sort_values('estimate_rating', ascending=False)
         rating_df = rating_df[rating_df['estimate_rating'] > 3] 
-       
-
-        #print(rating_df.to_dict('records'))
+ 
         rating_df = rating_df.head(20)
         return rating_df.to_dict('records')
-         # return render_template('index.html', recipes=rating_df.to_dict('records'))
+
 
      

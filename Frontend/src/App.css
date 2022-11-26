@@ -13836,7 +13836,10 @@ amp-sidebar {
     width: 100%;
     left: 0;
 }
-
+#react-autowhatever-2{
+    max-height: 220px;
+    overflow-y: auto;
+}
 .global-tray-header .suggest-form .spyglass,
 .global-tray-header .suggest-form .cancel {
     position: absolute;

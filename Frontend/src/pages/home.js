@@ -96,7 +96,7 @@ export default class Home extends Component {
                     console.log(a.substr(0, e.target.value.length).toLowerCase())
                 }
             });
-            this.setState({searchKeyResult: temp.slice(0, 5)});
+            this.setState({searchKeyResult: temp});
         }
         console.log(this.state.searchKeyResult)
     }
@@ -130,7 +130,7 @@ export default class Home extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="react-autowhatever-2" role="listbox" className="suggestion-containe hidden">
+                                            <div id="react-autowhatever-2" role="listbox" className="suggestion-containe hidden" >
                                                 <ul role="listbox">
                                                     {this.state.searchKeyResult.map((search, index) =>
                                                         <li key={`key${index}`} role="option" id={`react-autowhatever-1--item${index}`} aria-selected="false" onClick={() => this.handleAddIngredient(search)} className="ingredient-suggestion" data-suggestion-index="3">
