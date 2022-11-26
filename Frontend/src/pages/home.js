@@ -34,7 +34,7 @@ export default class Home extends Component {
                 const data = response.data;
                 console.log(response);
                 //debugger
-                this.setState({searchRecipe: data.recipes.slice(0, 10), search: true, isLoading: false}, () => {});
+                this.setState({searchRecipe: data.recipes.slice(0, 20), search: true, isLoading: false}, () => {});
                // this.setState({isLoading: false});
             })
             // .then(result => {

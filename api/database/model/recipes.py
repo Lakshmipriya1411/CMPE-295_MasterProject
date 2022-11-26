@@ -354,32 +354,77 @@ class RecipeModel:
         
         def get_recipes_by_selected_ingredients(self,ingredients,token):
             ser = Service(self.collection_name)
-            query = {"ingredients":{"$exists":ingredients}}
+            #query = {"ingredients":{"$exists":ingredients}}
             u = db.user_dataset.find_one({'access_token':token})
+            #print(u)
             res = ser.search(ingredients,u['user_id'])
             #import pdb;pdb.set_trace()
-            import math
-            res = [0 if math.isnan(x) else x for x in res]
+            #import math
+            #res = [0 if math.isnan(x) else x for x in res]
             lst = []
             for recipe in res:
                 lstitem = {}
-                lstitem['id'] = str(recipe['recipe_id']) if 'recipe_id' in recipe else ''
-                lstitem['title'] = recipe['title'] if 'title' in recipe else ''
-                lstitem['mins'] = recipe['minutes'] if 'minutes' in recipe else ''
-                lstitem['contributor_id'] = recipe['contributor_id'] if 'contributor_id' in recipe else ''
-                lstitem['recipe_submitted_date'] = recipe['recipe_submitted_date'] if 'recipe_submitted_date' in recipe else ''
-                lstitem['recipe_tags'] = recipe['recipe_tags'] if 'recipe_tags' in recipe else ''
-                lstitem['nutrition'] = recipe['nutrition'] if 'nutrition' in recipe else ''
-                lstitem['n_directions']= recipe['n_directions'] if 'n_directions' in recipe else ''
-                lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''
-                if recipe['description'] == NaN:
-                    lstitem['description'] = "No Description Found"
-                else:
-                    lstitem['description'] = recipe['description'] if 'description' in recipe else ''
-                lstitem['rating'] = recipe.get("user_rating") if 'user_rating' in recipe else ''
-                lstitem['review'] = recipe.get("user_review") if 'user_review' in recipe else ''
-                lstitem['ingredients'] = recipe['ingredients']
-                lstitem['image'] = recipe['image'] if 'image' in recipe else ''
+                if 'recipe_id' in recipe and recipe['recipe_id']!='NaN': 
+                    lstitem['id'] =  str(recipe['recipe_id']) 
+                else :
+                    lstitem['id']=''
+                if 'title' in recipe and recipe['title']!='NaN': 
+                    lstitem['title'] = recipe['title'] 
+                else :
+                    lstitem['title']=''
+                if 'mins' in recipe and recipe['mins']!='NaN': 
+                    lstitem['mins'] = recipe['minutes'] if 'minutes' in recipe else '' 
+                else :
+                    lstitem['mins']=''
+                if 'contributor_id' in recipe and recipe['contributor_id']!='NaN': 
+                     lstitem['contributor_id'] = recipe['contributor_id'] if 'contributor_id' in recipe else ''
+                else :
+                    lstitem['contributor_id']=''
+                if 'recipe_submitted_date' in recipe and recipe['recipe_submitted_date']!='NaN': 
+                    lstitem['recipe_submitted_date'] = recipe['recipe_submitted_date'] if 'recipe_submitted_date' in recipe else ''
+                else :
+                    lstitem['recipe_submitted_date']=''
+
+                if 'recipe_tags' in recipe and recipe['recipe_tags']!='NaN': 
+                    lstitem['recipe_tags'] = recipe['recipe_tags'] if 'recipe_tags' in recipe else ''
+                else :
+                    lstitem['recipe_tags']=''
+                if 'nutrition' in recipe and recipe['nutrition']!='NaN': 
+                    lstitem['nutrition'] = recipe['nutrition'] if 'nutrition' in recipe else ''
+                else :
+                    lstitem['nutrition']=''
+
+                if 'n_directions' in recipe and recipe['n_directions']!='NaN': 
+                     lstitem['n_directions']= recipe['n_directions'] if 'n_directions' in recipe else ''
+                else :
+                    lstitem['n_directions']=''
+                if 'directions' in recipe and recipe['title']!='NaN': 
+                     lstitem['directions'] = recipe['directions'] if 'directions' in recipe else ''     
+                else :
+                    lstitem['directions']=''
+                if 'description' in recipe and recipe['description']!='NaN': 
+                     lstitem['description'] =  recipe['description'] if recipe['description']!='NaN' else '' if 'description' in recipe else ''
+                else :
+                    lstitem['description']=''
+
+                if 'rating' in recipe and recipe['rating']!='NaN': 
+                      lstitem['rating'] = recipe.get("user_rating") if 'user_rating' in recipe else ''
+                else :
+                    lstitem['rating']=''
+                if 'review' in recipe and recipe['review']!='NaN': 
+                    lstitem['review'] = recipe.get("user_review") if 'user_review' in recipe else ''
+                else :
+                    lstitem['review']=''
+                if 'ingredients' in recipe and recipe['ingredients']!='NaN': 
+                     lstitem['ingredients'] = recipe['ingredients']
+                else :
+                    lstitem['ingredients']=''
+
+                if 'image' in recipe and recipe['image']!='NaN': 
+                      lstitem['image'] = '' if recipe['image']=='NaN' else recipe['image'] if 'image' in recipe else ''
+                else :
+                    lstitem['image']=''
+               
                 lst.append(lstitem)
             
             #print(lst)

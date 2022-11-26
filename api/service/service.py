@@ -10,20 +10,11 @@ import pickle
 import os
 from surprise import Reader, Dataset, SVD, dump, accuracy
 from surprise.model_selection import train_test_split, KFold
+import random
 
-
-
-#df = pd.read_csv('../recipe_dataset.csv', header = 0)
-#df = pd.read_csv('~/Downloads/recipe_dataset.csv', header = 0)
 df = pd.read_csv('~/Downloads/recipe_dataset_new.csv',header=0)
 print(df.tail(3))
-# data = db.recipe_dataset.find()
-# df = pd.DataFrame.from_dict(data)
 
-# coll = db.recipe_dataset
-# raw_coll = coll.with_options(codec_options=coll.codec_options.with_options(document_class=RawBSONDocument))
-# data = raw_coll.find()
-# df = pd.DataFrame.from_dict(data)
 df_search = df.copy()
 df_search = df_search.drop_duplicates(subset="recipe_id")
 tfidf_title_vectorizer = TfidfVectorizer()
@@ -32,14 +23,10 @@ tfidf_title_features = tfidf_title_vectorizer.fit_transform(df_search['ingredien
 # Load both models (tfidf not used as of now)
 tfidf_vectorizer = pickle.load(open(os.path.expanduser("~/Downloads/tfidf_vectorizer.pkl"), 'rb'))
 tfidf_feature = pickle.load(open(os.path.expanduser("~/Downloads/tfidf_feature.pkl"), "rb"))
-#collaborative_filtering_model = dump.load(os.path.expanduser('~/Downloads/model.pkl'))
-# tfidf_vectorizer = pickle.load(open('~/tfidf_vectorizer.pkl', 'rb'))
-# tfidf_feature = pickle.load(open('~/tfidf_feature.pkl', "rb"))
-# collaborative_filtering_model = dump.load('../models/model.pkl')  
 
 class Service:
     def __init__(self,collection) -> None:
-        self.collaborative_filtering_model = dump.load(os.path.expanduser('~/Downloads/model.pkl'))[1]
+        self.collaborative_filtering_model = dump.load(os.path.expanduser('~/Downloads/new_model.pkl'))[1]
         self.collection_name = collection
         if(collection == 'user'):
             self.db = db.user
@@ -86,37 +73,16 @@ class Service:
             "recipe_id": recipe['recipe_id'],
             "date": recipe['date'],
             "user_rating": str(object['user_rating']),
-            "user_review": ''
+            "user_review": 'Good',
+            "image":recipe['image'] if 'image' in recipe else ''
             }
         if not rated_recipe:
             res = db.recipe_dataset.insert_one(recipe_obj)
         else:
             myquery = { "title": object['title'],'user_id':user['user_id']}  
-            newvalues = { "$set": { "user_rating": object['user_rating'] } }
+            newvalues = { "$set": { "user_rating": str(object['user_rating']) } }
             res = self.update(myquery,newvalues)
       
-        df_new = df.iloc[0].copy(deep=True)
-
-        df_new['title'] = object['title']
-        df_new['minutes'] = int(object['mins'])
-        df_new['contributor_id'] = int(object['contributor_id'])
-        df_new['recipe_submitted_date'] = object['recipe_submitted_date']
-        df_new['recipe_tags'] = recipe_tags
-        df_new['nutrition'] = object['nutrition']
-        df_new['n_directions'] = int(object['n_directions'])
-        df_new['directions'] = self.get_list_string(object['directions'])
-        df_new['description'] = object['description']
-        df_new['ingredients'] = recipe['ingredients']
-        df_new['n_ingredients'] = int(object['ingredientsCount'])
-        df_new['user_id'] = int(user['user_id']) if 'user_id'in user else ''
-        df_new['recipe_id'] = int(recipe['recipe_id'])
-        df_new['date']= recipe['date']
-        df_new['user_rating'] = int(object['user_rating'])
-        df_new['user_review'] = ""
-     
-        df.loc[len(df.index)] = df_new
-        df_search.loc[len(df.index)] = df_new
-        df.to_csv('~/Downloads/recipe_dataset_new.csv',index=False)
 
         return "Successfully updated the record"
 
@@ -129,8 +95,7 @@ class Service:
             dbi = db.ingredient_frequency_map
             return list(dbi.find())
        
-            # for doc in dbi.find():
-            #     print(doc)
+  
     def find(self,collectionname,field,value):
         dbi = db.recipe_dataset
         return list(dbi.find({field:str(value)}).limit(50))
@@ -138,33 +103,16 @@ class Service:
     def find_matching(self,collectioname,query):
         return list(db.recipe_dataset.find(query).sort("user_rating", -1).limit(50))
 
-        # print("res")
-        # for i in res:
-        #     print("ASfdsfabhi bahi")
-        #     print(i)
 
     def find_by_aggregation(self,collection):
-        
-        # db.recipe_dataset.aggregate({
-  		#             "$group" : {"title":{"$title"}, "review_count":{"$sum":-1},all:{"$push":"$$ROOT"}}
-        #             });
-       # print("res")
-        # res = db.recipe_dataset.aggregate([
-        #     { "$group": { "title": "title", "review_count": {"$sum": -1 } },all:{"$push":"$$ROOT"} },
-        #     { "$limit": 5},
-        #     { "$sort":{"user_rating":-1}}
-        #     ] )
+      
         res = list(db.recipe_dataset.aggregate([
             {"$match": { "user_rating":"5" } },
             {"$group" : {"_id":"$title", "count":{"$sum":1}}},
             {"$sort": {"count":-1}} ,
             {"$limit":50}
             ]))
-        
-        #print(res[0])
-      
-        #shuffle(res)
-       # print(res)
+   
         return res
 
     def find_by_reviews(self,collection):
@@ -174,7 +122,7 @@ class Service:
             {"$limit":50}
             ]))
  
-       # print(res)
+ 
         return res
   
     def find_auth_one(self,field,value):
@@ -216,27 +164,33 @@ class Service:
         nonvegan_recipes = df[~df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
         return nonvegan_recipes.to_dict('records')
 
-    def train(self):
-        df3 = pd.read_csv('~/Downloads/recipe_dataset_new.csv', header = 0)
-        #print("LAST", df.iloc[-1])
-        #print("Size", df.size)
-        print(df3.tail(3))
-
-        df4 = df3.filter(items=['user_id', 'recipe_id', 'user_rating'])
-
+    def train(self,df):
         def split_train_test(data, svd):
             trainset, testset = train_test_split(data, test_size=0.25)
-
             #trainset = data.build_full_trainset()
             svd.fit(trainset)
+        #df_res = pd.DataFrame(df)
 
+        reader = Reader(rating_scale=(1, 5))
         # Train the dataset
-        reader = Reader()
+        #reader = Reader()
         svd = SVD()
-        data = Dataset.load_from_df(df4[['user_id', 'recipe_id', 'user_rating']], reader)
+        data = Dataset.load_from_df(df[['user_id', 'recipe_id', 'user_rating']], reader)
         split_train_test(data, svd)
+        
         self.collaborative_filtering_model = svd
-
+   
+    def tfidf_model_cold_start(self,input_ner, num_results,cold_start_df):
+        tfidf_title_vectorizer_cold_start = TfidfVectorizer()
+        tfidf_title_features_cold_start = tfidf_title_vectorizer_cold_start.fit_transform(cold_start_df['ingredients'])
+        tfidf_title_features_cold_start[0].todense().shape
+        
+        input_vector = tfidf_title_vectorizer_cold_start.transform(pd.Series(input_ner))
+        pairwise_dist = pairwise_distances(tfidf_title_features_cold_start, input_vector)
+        indices = np.argsort(pairwise_dist.flatten())[0:num_results]
+        pdists  = np.sort(pairwise_dist.flatten())[0:num_results]
+        df_indices = list(cold_start_df.index[indices])
+        return df_indices
     def run_tfidf(self,input_ner, num_results):
         """
             Runs cosine similarity, comparing user input of words to dataframe vector.
@@ -262,7 +216,6 @@ class Service:
     #             list of recipes
     #     """
         #indices = self.run_tfidf("['brown sugar', ' milk', ' vanilla', ' nuts', ' butter', ' bite size shredded rice biscuits']", 20)
-        df3 = pd.read_csv('~/Downloads/recipe_dataset_new.csv', header = 0)
         ings = '['
         for indx,i in enumerate(ingredients):
             ings+="'"+str(i)+"'"
@@ -271,22 +224,62 @@ class Service:
                 ings+=','
         
         ings +=']'
-        print("user_id"+user_id)
-        indices = self.run_tfidf(ings, 120)
-        #str_indices = [str(x) for x in indices]
-        #recipes = list(db.recipe_dataset.find( { "" : { "$in" : str_indices } } ) )
-       # print(recipes)
-       # rating_df = pd.DataFrame(recipes)
-       
-        rating_df = df3.copy()
-  
+        #print("user_id"+user_id)
+        indices = self.run_tfidf(ings, 100)
+        print(indices)
+        rating_df = df_search.copy()
         rating_df = rating_df[rating_df.index.isin(indices)]
         rating_df.reset_index()
+        #prepare input for Collaborative Filtering
+        #Step 1. Read ratings from Mongo DB
+        dfre = list(db.recipe_dataset.find({'title': { "$in": list(rating_df['title'])} } ))
+        dfre_df = pd.DataFrame(dfre)
+        dfre_con = dfre_df.astype({'recipe_id': 'int64','user_id':'int64','user_rating':'int64'})
+        df1 = dfre_con.filter(items=['recipe_id','user_id', 'user_rating'])
+        #print(df1)
+        #Step 2. Add ratings if the pased in user rated any of these pairwise similarity result recipes
+        for ind in rating_df.index:
+            title = rating_df['title'][ind]
+            
+            if not df.loc[(df['title']==title) & (df['user_id'] == int(user_id))].empty:
+                dg = df.loc[(df['title']==title) & (df['user_id'] == int(user_id))]
+                df1.loc[len(df1.index)] = [int(dg['recipe_id']), int(user_id), int(dg['user_rating'])] 
+        print(df1)
+
+        # Step 3. Find matching ingredients in u(ser rating and get those top 5 records
+        #cold_start_df = df.query('user_id=='+str(user_id)+"'")
+        cold_start_df=df.query("user_id == "+user_id)
+        indi = self.tfidf_model_cold_start(ings, 100,cold_start_df)
+        print("ind")
+        print(indi)
+        rating_df_cs = df.copy()
+        rating_df_cs = rating_df_cs[rating_df_cs.index.isin(indi)]
+        rating_df_cs.reset_index()
+        print(rating_df_cs)
+        dfre_ur = db.recipe_dataset.find({ 'title': { '$in': list(rating_df['title']) } ,'user_id':str(user_id)} )
+        print("DF")
+        dfre_df = pd.DataFrame(dfre_ur)
+        print(dfre_df)
+        if not dfre_df.empty: 
+            dfre_con = dfre_df.astype({'recipe_id': 'int64','user_id':'int64','user_rating':'int64'})
+            df1_m = dfre_con.filter(items=['recipe_id','user_id', 'user_rating'])
+            df1= df1.append(df1_m, ignore_index=True)
+        print("Hhh")
+        #print(df1_m)
+        #print(df1)
+        #print(rating_df)
+        #print(df1)
+        self.train(df1)
         rating_df['estimate_rating'] = rating_df['recipe_id'].apply(lambda x: self.collaborative_filtering_model.predict(user_id, x).est)
+        #print(str(rating_df['title'])+": "+str(rating_df['estimate_rating']))
         #print(rating_df.to_dict('records'))
         rating_df = rating_df.drop_duplicates(subset="recipe_id")
         rating_df = rating_df.sort_values('estimate_rating', ascending=False)
-        print(rating_df.to_dict('records'))
+        rating_df = rating_df[rating_df['estimate_rating'] > 3] 
+       
+
+        #print(rating_df.to_dict('records'))
+        rating_df = rating_df.head(20)
         return rating_df.to_dict('records')
          # return render_template('index.html', recipes=rating_df.to_dict('records'))
 
