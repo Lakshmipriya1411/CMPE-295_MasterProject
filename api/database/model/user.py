@@ -8,7 +8,7 @@ from api.database.validation import Validator
 from api.service.service import Service
 import datetime
 from bson import ObjectId
-
+import random
 from flask_bcrypt import generate_password_hash, check_password_hash
 
 
@@ -45,7 +45,8 @@ class UserModel:
             # checking password
             result = bcrypt.checkpw(userBytes, password)
             return result
-       
+        def get_difference(self,list_a, list_b):
+            return set(list_a)-set(list_b)
         def sign_up(self, user):
             # Validator will throw error if invalid
             salt = 'secret'
@@ -58,6 +59,24 @@ class UserModel:
             # Hashing the password
             hash = bcrypt.hashpw(bytes, salt)
             user['user_password'] = hash
+            #existing_users = list(db.user_dataset.find())
+            #print("1")
+            existing_users = list(db.user_dataset.find({}, {'user_id':1}))
+            existing_users_lst =[]
+            for usr in existing_users:
+                existing_users_lst.append(int(usr['user_id']))
+          
+            
+            new_usrs = list(db.recipe_dataset.aggregate([{ "$project" : { "user_id" : 1}},{"$limit":200}]))
+            new_users_lst=[]
+            for usr in new_usrs:
+                new_users_lst.append(int(usr['user_id']))
+         
+            while(True):
+                new_user = random.choice(list(new_users_lst))
+                if(new_user not in existing_users):
+                    break
+            user['user_id'] = str(new_user)
             ser = Service(self.collection_name)
             return ser.insert(user)
         
@@ -75,12 +94,12 @@ class UserModel:
             return ser.find_one_email('user_email',email)
 
         def save_access_token(self,token,user):
-            print('token')
-            print(user)
+            #print('token')
+            #print(user)
             ser = Service(self.collection_name)
             #user['access_token'] = token
             # user['log_in_time'] = datetime.datetime.now()
-            print(token)
+            #print(token)
             myquery = { "_id": ObjectId(user['_id']) }
            
             newvalues = { "$set": { "access_token": token,"log_in_time":datetime.datetime.now() } }

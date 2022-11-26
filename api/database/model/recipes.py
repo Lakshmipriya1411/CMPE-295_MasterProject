@@ -48,15 +48,28 @@ class RecipeModel:
             #query = { tags: "red" } )
 
             res =  ser.find_matching_cuisine(self.collection_name,cuisine)
-            print("res")
-            #print(res[0])
+            #print("res")
+            #print(list(res))
             #del res['_id']
             result = list(map(dict, set(tuple(sorted(sub.items())) for sub in res)))
-            
+            #res = []
+            titles =[]
+            for tit in result:
+                titles.append(tit['title'])
+            titleslst = []
+            [titleslst.append(x) for x in titles if x not in titleslst]
+            #print(titleslst)
+            final_res=[]
+            for re in res:
+                if re['title'] in titleslst:
+                    #print(re['title'])
+                    titleslst.remove(re['title'])
+                    #print(titleslst)
+                    final_res.append(re)
             #return result
             #print(res)
             lst = []
-            for recipe in result:
+            for recipe in final_res:
                 lstitem = {}
                 lstitem['id'] = str(recipe['_id']) if '_id' in recipe else ''
                 lstitem['title'] = recipe['title'] if 'title' in recipe else ''
@@ -80,15 +93,15 @@ class RecipeModel:
             #print('find')
             recipe = ''
             if(len(recipe_id) >= 12):
-                print("hello" +recipe_id)
+                #print("hello" +recipe_id)
                 recipe =  ser.find_one('recipe_dataset','_id',ObjectId(recipe_id))
                
             else:
-                print("hello in else" +recipe_id)
+                #print("hello in else" +recipe_id)
                 recipe =  ser.find_one('recipe_dataset','recipe_id',recipe_id)
 
-            print("recipe_id"+str(recipe_id))
-            print(recipe)
+            #print("recipe_id"+str(recipe_id))
+            #print(recipe)
             lstitem = {}
             lstitem['id'] = str(recipe['_id']) if '_id' in recipe else ''
             lstitem['title'] = recipe['title'] if 'title' in recipe else ''
@@ -355,15 +368,18 @@ class RecipeModel:
         def get_recipes_by_selected_ingredients(self,ingredients,token):
             ser = Service(self.collection_name)
             #query = {"ingredients":{"$exists":ingredients}}
+            #print("wat")
             u = db.user_dataset.find_one({'access_token':token})
             #print(u)
             res = ser.search(ingredients,u['user_id'])
             #import pdb;pdb.set_trace()
             #import math
+            #print("res")
             #res = [0 if math.isnan(x) else x for x in res]
             lst = []
             for recipe in res:
                 lstitem = {}
+                #print(recipe)
                 if 'recipe_id' in recipe and recipe['recipe_id']!='NaN': 
                     lstitem['id'] =  str(recipe['recipe_id']) 
                 else :
@@ -424,7 +440,8 @@ class RecipeModel:
                       lstitem['image'] = '' if recipe['image']=='NaN' else recipe['image'] if 'image' in recipe else ''
                 else :
                     lstitem['image']=''
-               
+                
+                #print(lstitem)
                 lst.append(lstitem)
             
             #print(lst)

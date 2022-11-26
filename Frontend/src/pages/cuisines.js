@@ -26,7 +26,7 @@ export default class Cuisines extends Component {
     handleViewCuisine = (value) => {
         console.log("in handle view cuisine");
         //console.log(value);
-        //localStorage.setItem("cuisineDetilsName", value.name);
+        localStorage.setItem("cuisineDetilsName", value.name);
     }
 
     render() {

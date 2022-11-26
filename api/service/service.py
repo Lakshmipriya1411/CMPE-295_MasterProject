@@ -13,7 +13,7 @@ from surprise.model_selection import train_test_split, KFold
 import random
 
 df = pd.read_csv('~/Downloads/recipe_dataset_new.csv',header=0)
-print(df.tail(3))
+#print(df.tail(3))
 
 df_search = df.copy()
 df_search = df_search.drop_duplicates(subset="recipe_id")
@@ -129,7 +129,7 @@ class Service:
         return self.db.find_one({ field: value })
 
     def find_one_email(self,field,value):
-        print("isuue here")
+        #print("isuue here")
         return self.db.find_one({ field: value })
 #             return jsonify({ "error": "Email address already in use" }), 400
     def find_one(self,collection,field,value):
@@ -149,17 +149,21 @@ class Service:
         return self.db.delete(id, self.collection_name)
     
     def find_matching_cuisine(self,collection,cuisine):
-        return db.recipe_dataset.find({"recipe_tags":{"$regex":cuisine}}).limit(50)
+        print(cuisine)
+        lst_res = list( db.recipe_dataset.find({"recipe_tags":{"$regex":cuisine}}).limit(150))
+        print("resss")
+        #print(lst_res)
+        return lst_res
 
     def find_matching_vegan(Self,colelction):
-        print(df.tail(2))
+        #print(df.tail(2))
         column_output = ['recipe_id','title','ingredients','recipe_tags']
         vegan_recipes = df[df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
         #print(vegan_recipes)
         return vegan_recipes.to_dict('records')
 
     def find_matching_non_vegan(Self,colelction):
-        print(df.tail(2))
+        #print(df.tail(2))
         column_output = ['recipe_id','title','ingredients','recipe_tags']
         nonvegan_recipes = df[~df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
         return nonvegan_recipes.to_dict('records')
@@ -234,6 +238,10 @@ class Service:
         #Step 1. Read ratings from Mongo DB
         dfre = list(db.recipe_dataset.find({'title': { "$in": list(rating_df['title'])} } ))
         dfre_df = pd.DataFrame(dfre)
+        #print(dfre_df)
+        dfre_df['recipe_id'] = dfre_df['recipe_id'].fillna("0")
+        dfre_df['user_id'] = dfre_df['user_id'].fillna("0")
+        dfre_df['user_rating'] = dfre_df['user_rating'].fillna("0")
         dfre_con = dfre_df.astype({'recipe_id': 'int64','user_id':'int64','user_rating':'int64'})
         df1 = dfre_con.filter(items=['recipe_id','user_id', 'user_rating'])
         #print(df1)

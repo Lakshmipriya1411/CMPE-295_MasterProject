@@ -45,14 +45,15 @@ class GetCuisineRecipesApi(Resource):
             logGetSelectedCusines.logger.info("------------------Enter get REcipes By Cusine Type---------------")
             rcp = request.get_json()
             csn = rcp.get('cuisine')
+            print("cuisine set"+csn)
             recipeslst = recipeModel.get_recipes_by_selected_cuisine_type(csn)
-            print("cuisine set")
+            
             logGetSelectedCusines.logger.info("Get Selected Recipe By Cusine success")
             logGetSelectedCusines.logger.info("------------------End of Get REcipes By Cusine Type---------------")
             return {"recipes": recipeslst}, 200
         except Exception as ex:
             logGetSelectedCusines.logger.error("Error processing the request")
-            # raise ex
+            raise ex
             logGetSelectedCusines.logger.error(ex)
             return {'error': 'Error processing the request'}, 400
 
@@ -210,8 +211,8 @@ class GetRecipesByIngredientsApi(Resource):
         try:
             logGetIngredRecipes.logger.info("------------------Enter Get Recipes By Ingredients List---------------")
             rcp = request.get_json()
-            print("j")
-            print(rcp)
+            #print("j")
+            #print(rcp)
             ct = rcp.get('ingredients')
             user = rcp.get('token')
             recipeslst = recipeModel.get_recipes_by_selected_ingredients(ct,user)
@@ -225,6 +226,7 @@ class GetRecipesByIngredientsApi(Resource):
         except Exception as ex:
             logGetIngredRecipes.logger.error("Error processing the request")
             logGetIngredRecipes.logger.error(ex)
+            raise(ex)
             return {'error': 'Error processing the request'}, 400
 
 

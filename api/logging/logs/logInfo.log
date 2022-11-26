@@ -6442,3 +6442,316 @@ flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingr
 flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
 flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
 flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - ERROR - Error processing the request'
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - Inserted docuemnt successfully
+flask_restx.namespace.api/auth/signup - INFO - ------------------End of SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - Inserted docuemnt successfully
+flask_restx.namespace.api/auth/signup - INFO - ------------------End of SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - ERROR - Email already exists
+flask_restx.namespace.api/auth/signin - INFO - ------------------Enter SignIn---------------
+flask_restx.namespace.api/auth/signin - INFO - Email or password is valid
+flask_restx.namespace.api/auth/signin - INFO - ------------------End of SignIn---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - cannot convert float NaN to integer
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - cannot convert float NaN to integer
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - cannot convert float NaN to integer
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - cannot convert float NaN to integer
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - cannot convert float NaN to integer
+flask_restx.namespace.api/auth/signin - INFO - ------------------Enter SignIn---------------
+flask_restx.namespace.api/auth/signin - INFO - Email or password is valid
+flask_restx.namespace.api/auth/signin - INFO - ------------------End of SignIn---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - cannot convert float NaN to integer
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - cannot convert float NaN to integer
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - cannot convert float NaN to integer
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - cannot convert float NaN to integer
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - cannot convert float NaN to integer
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - Get Recipe By Selected Ingredients success
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------End of Get REcipes By Ingredients List---------------
+flask_restx.namespace.api/auth/signin - INFO - ------------------Enter SignIn---------------
+flask_restx.namespace.api/auth/signin - INFO - Email or password is valid
+flask_restx.namespace.api/auth/signin - INFO - ------------------End of SignIn---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - can only concatenate str (not "int") to str
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - can only concatenate str (not "int") to str
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/ingredient - ERROR - can only concatenate str (not "int") to str
+flask_restx.namespace.api/auth/signup - INFO - ------------------Enter SignUp---------------
+flask_restx.namespace.api/auth/signup - INFO - Inserted docuemnt successfully
+flask_restx.namespace.api/auth/signup - INFO - ------------------End of SignUp---------------
+flask_restx.namespace.api/auth/signin - INFO - ------------------Enter SignIn---------------
+flask_restx.namespace.api/auth/signin - INFO - Email or password is valid
+flask_restx.namespace.api/auth/signin - INFO - ------------------End of SignIn---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - Get Recipe By Selected Ingredients success
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------End of Get REcipes By Ingredients List---------------
+flask_restx.namespace.api/auth/signin - INFO - ------------------Enter SignIn---------------
+flask_restx.namespace.api/auth/signin - INFO - Email or password is valid
+flask_restx.namespace.api/auth/signin - INFO - ------------------End of SignIn---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - Get Recipe By Selected Ingredients success
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------End of Get REcipes By Ingredients List---------------
+flask_restx.namespace.api/auth/signin - INFO - ------------------Enter SignIn---------------
+flask_restx.namespace.api/auth/signin - INFO - Email or password is valid
+flask_restx.namespace.api/auth/signin - INFO - ------------------End of SignIn---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - Get Recipe By Selected Ingredients success
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------End of Get REcipes By Ingredients List---------------
+flask_restx.namespace.api/auth/signin - INFO - ------------------Enter SignIn---------------
+flask_restx.namespace.api/auth/signin - INFO - Email or password is valid
+flask_restx.namespace.api/auth/signin - INFO - ------------------End of SignIn---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/recipes/popular - INFO - ------------------Enter get Recipes By Popularity---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/recipes/popular - INFO - Get Recipe By Popularity success
+flask_restx.namespace.api/recipes/popular - INFO - ------------------End of Get Recipes By Popularity---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------Enter get Vegan Recipes---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - Get Vegan Recipes success
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------End of Get Vegan Recipes---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------Enter Get Non Vegan Recipes---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - Get Non Vegan Recipes success
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------End of Get Non Vegan Recipes---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - $regex has to be a string, full error: {'ok': 0.0, 'errmsg': '$regex has to be a string', 'code': 2, 'codeName': 'BadValue', '$clusterTime': {'clusterTime': Timestamp(1669483955, 7), 'signature': {'hash': b'\x91Q\x80\xca\xb6X\x11dr\xbdk\x90\x83\x1b\xe4\x04X:h\xaa', 'keyId': 7137428887885053953}}, 'operationTime': Timestamp(1669483955, 7)}
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - ERROR - Error processing the request
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------Enter get REcipes By Cusine Type---------------
+flask_restx.namespace.api/recipes/cuisine/type - INFO - Get Selected Recipe By Cusine success
+flask_restx.namespace.api/recipes/cuisine/type - INFO - ------------------End of Get REcipes By Cusine Type---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------Enter Get Recipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/ingredient - INFO - Get Recipe By Selected Ingredients success
+flask_restx.namespace.api/recipes/ingredient - INFO - ------------------End of Get REcipes By Ingredients List---------------
+flask_restx.namespace.api/recipes/cuisine - INFO - ------------------Enter get Recipes By Selected RecipeID--------------
+flask_restx.namespace.api/recipes/cuisine - INFO - Get Selected Recipe By Id success
+flask_restx.namespace.api/recipes/cuisine - INFO - ------------------End of Get Reipes By Selected RecipeID---------------
+flask_restx.namespace.api/ingredients - INFO - ------------------Enter get Ingredients---------------
+flask_restx.namespace.api/recipes/popular - INFO - ------------------Enter get Recipes By Popularity---------------
+flask_restx.namespace.api/ingredients - INFO - Fetchings Ingredients successfully
+flask_restx.namespace.api/ingredients - INFO - ------------------End of Get Ingredients---------------
+flask_restx.namespace.api/recipes/popular - INFO - Get Recipe By Popularity success
+flask_restx.namespace.api/recipes/popular - INFO - ------------------End of Get Recipes By Popularity---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------Enter get Vegan Recipes---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - Get Vegan Recipes success
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------End of Get Vegan Recipes---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------Enter Get Non Vegan Recipes---------------
+flask_restx.namespace.api/recipes/cookingtime - INFO - Get Non Vegan Recipes success
+flask_restx.namespace.api/recipes/cookingtime - INFO - ------------------End of Get Non Vegan Recipes---------------
