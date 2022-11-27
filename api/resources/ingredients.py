@@ -2,11 +2,13 @@ from api.database.model import ingredients
 from flask_restful import Resource
 from api.logging.logger import ingredsFreq, ingreds
 import json
+from flask_cors import cross_origin
 
 ingredients = ingredients.IngredientsModel()
 
 
 class GetingredientsApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             ingreds.logger.info("------------------Enter get Ingredients---------------")
@@ -22,6 +24,7 @@ class GetingredientsApi(Resource):
 
 
 class GetIngredientFrequencyMapApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             ingredsFreq.logger.info("------------------Enter get Ingredients FrequencyMap---------------")

@@ -9,6 +9,7 @@ import ast
 recipeModel = recipes.RecipeModel()
 
 class GetRecipesApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             logGetCusines.logger.info("------------------Enter get Recipes By All Cusine Types---------------")
@@ -22,6 +23,7 @@ class GetRecipesApi(Resource):
             raise ex
 
 class GetSelectedRecipeApi(Resource):
+    @cross_origin()
     def post(self):
         try:
             logGetRecipeByID.logger.info("------------------Enter get Recipes By Selected RecipeID--------------")
@@ -40,6 +42,7 @@ class GetSelectedRecipeApi(Resource):
 
 
 class GetCuisineRecipesApi(Resource):
+    @cross_origin()
     def post(self):
         try:
             logGetSelectedCusines.logger.info("------------------Enter get REcipes By Cusine Type---------------")
@@ -59,6 +62,7 @@ class GetCuisineRecipesApi(Resource):
 
 
 class GetSelectedDietRecipesApi(Resource):
+    @cross_origin()
     def post(self):
         try:
             logGetSelectedDietRecipes.logger.info("------------------Enter get Recipes By Selected Diet Type---------------")
@@ -76,6 +80,7 @@ class GetSelectedDietRecipesApi(Resource):
 
 
 class GetDietRecipesApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             logGetDietRecipes.logger.info("------------------Enter get Recipes By All Diet Types---------------")
@@ -93,6 +98,7 @@ class GetDietRecipesApi(Resource):
 
 
 class GetPopularRecipesApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             logGetPopularRecipes.logger.info("------------------Enter get Recipes By Popularity---------------")
@@ -108,6 +114,7 @@ class GetPopularRecipesApi(Resource):
 
 
 class GetPopularRatedRecipesApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             logGetPopularRatedRecipes.logger.info("------------------Enter get Recipes By Popularity and RAting Type---------------")
@@ -144,6 +151,7 @@ class GetPopularRatedRecipesApi(Resource):
 #             #return {'error': 'Error processing the request'}, 400
 
 class GetPopularReviewedRecipesApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             logGetPopularReviewRecipes.logger.info("------------------Enter get Recipes By Popularity and Reviews Type---------------")
@@ -159,6 +167,7 @@ class GetPopularReviewedRecipesApi(Resource):
 
 
 class GetRecipesByCookingTimeApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             logGetCookingRecipes.logger.info("------------------Enter get Recipes By Cooking Time---------------")
@@ -173,6 +182,7 @@ class GetRecipesByCookingTimeApi(Resource):
 
 
 class GetRecipesBySelectedCookingTimeApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             logGetSelectedCookingRecipes.logger.info("------------------Enter Get Recipes By Selected Cooking Time---------------")
@@ -190,6 +200,7 @@ class GetRecipesBySelectedCookingTimeApi(Resource):
 
 
 class GetRecipesByIngredientApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             logGetSelectedIngredRecipes.logger.info("------------------Enter Get Recipes By Selected Ingredient Type---------------")
@@ -207,6 +218,7 @@ class GetRecipesByIngredientApi(Resource):
 
 
 class GetRecipesByIngredientsApi(Resource):
+    @cross_origin()
     def post(self):
         try:
             logGetIngredRecipes.logger.info("------------------Enter Get Recipes By Ingredients List---------------")
@@ -231,6 +243,7 @@ class GetRecipesByIngredientsApi(Resource):
 
 
 class UpdateRating(Resource):
+    @cross_origin()
     def post(self):
         try:
             logUpdateRating.logger.info("------------------Enter Update Rating---------------")
@@ -248,6 +261,7 @@ class UpdateRating(Resource):
 
 
 class UpdateReview(Resource):
+    @cross_origin()
     def post(self):
         try:
             logUpdateReview.logger.info("------------------Enter Update Recipe Review---------------")
@@ -264,6 +278,7 @@ class UpdateReview(Resource):
 
 
 class SearchRecipesApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             logSearchRecipe.logger.info("------------------Enter Search Recipes By Title---------------")
@@ -280,6 +295,7 @@ class SearchRecipesApi(Resource):
             return {'error': 'Error processing the request'}, 400
 
 class GetVeganRecipesApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             logGetCookingRecipes.logger.info("------------------Enter get Vegan Recipes---------------")
@@ -294,6 +310,7 @@ class GetVeganRecipesApi(Resource):
             #re_train_model
 
 class GetNonVeganRecipesApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             logGetCookingRecipes.logger.info("------------------Enter Get Non Vegan Recipes---------------")
@@ -307,6 +324,7 @@ class GetNonVeganRecipesApi(Resource):
             return {'error': 'Error processing the request'}, 400
 
 class ReTrainModelApi(Resource):
+    @cross_origin()
     def get(self):
         try:
             logGetCookingRecipes.logger.info("------------------Enter Retrain ML model---------------")

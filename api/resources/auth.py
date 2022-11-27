@@ -10,10 +10,15 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from pymongo.errors import WriteError, DuplicateKeyError, CollectionInvalid,PyMongoError
 from api.logging.logger import signUp,signIn,signOut
 import datetime
+from flask_cors import CORS,cross_origin
+import app
 
 userModel = user.UserModel()
+CORS(app)
+
 
 class SignupApi(Resource):
+    @cross_origin()
     def post(self):
         try:
             signUp.logger.info("------------------Enter SignUp---------------")
@@ -45,6 +50,7 @@ class SignupApi(Resource):
             return {'error': 'Error processing the request'}, 400
 
 class SignInApi(Resource):
+    @cross_origin()
     def post(self):
         response = flask.jsonify({'some': 'data'})
         response.headers.add('Access-Control-Allow-Origin', '*')
@@ -73,6 +79,7 @@ class SignInApi(Resource):
             return {'error': 'Email address does not exists'}, 400
 
 class SignoutApi(Resource):
+    @cross_origin()
     @jwt_required()
     def post(self):
         try:
