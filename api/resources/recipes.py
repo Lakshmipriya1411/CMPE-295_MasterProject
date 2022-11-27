@@ -5,6 +5,7 @@ from api.logging.logger import logGetCusines, logGetCookingRecipes, logGetRecipe
 from api.logging.logger import logUpdateRating, logUpdateReview, logSearchRecipe
 import json
 import ast
+from flask_cors import cross_origin
 
 recipeModel = recipes.RecipeModel()
 

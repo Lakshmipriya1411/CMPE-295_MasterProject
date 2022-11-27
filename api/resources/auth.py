@@ -14,8 +14,6 @@ from flask_cors import CORS,cross_origin
 import app
 
 userModel = user.UserModel()
-CORS(app)
-
 
 class SignupApi(Resource):
     @cross_origin()

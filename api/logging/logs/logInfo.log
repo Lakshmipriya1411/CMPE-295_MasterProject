@@ -6764,3 +6764,9 @@ flask_restx.namespace.api/auth/signin - INFO - ------------------End of SignIn--
 flask_restx.namespace.api/auth/signin - INFO - ------------------Enter SignIn---------------
 flask_restx.namespace.api/auth/signin - INFO - Email or password is valid
 flask_restx.namespace.api/auth/signin - INFO - ------------------End of SignIn---------------
+flask_restx.namespace.api/recipes/popular - INFO - ------------------Enter get Recipes By Popularity---------------
+flask_restx.namespace.api/recipes/popular - INFO - Get Recipe By Popularity success
+flask_restx.namespace.api/recipes/popular - INFO - ------------------End of Get Recipes By Popularity---------------
+flask_restx.namespace.api/recipes/cuisine - INFO - ------------------Enter get Recipes By All Cusine Types---------------
+flask_restx.namespace.api/recipes/cuisine - INFO - Got Recipes By All Cusine Types successfully
+flask_restx.namespace.api/recipes/cuisine - INFO - ------------------End of Get Recipes By All Cusine Types---------------
