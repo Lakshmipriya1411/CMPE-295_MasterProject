@@ -3,3 +3,5 @@
 .DS_Store
 *.pyc
 node_modules/
+*.log
+*.json
