@@ -13,7 +13,7 @@ app = Flask(__name__)
 #CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-cors = CORS(app, resources={r"/foo": {"origins": "http://54.153.46.53:5000"}})
+cors = CORS(app, resources={r"/api": {"origins": "http://54.153.46.53:3000"}})
 #app.config.from_pyfile('config.py')
 swagger = Swagger(app)
 mail = Mail(app)
