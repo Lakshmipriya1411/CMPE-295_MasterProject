@@ -19,7 +19,7 @@ export default class CuisineDetails extends Component {
     handleRating = (value) => {
         console.log(value)
         this.setState({isLoading: true});
-        const url = 'http://54.153.46.53:5000/api/recipes/rating';
+        const url = 'http://ec2-54-153-46-53.us-west-1.compute.amazonaws.com:5000/api/recipes/rating';
         const data = this.state.recipeDetils;
         data.user_rating = value;
         const bodyFormData = {data}
@@ -45,7 +45,7 @@ export default class CuisineDetails extends Component {
 
     componentDidMount() {
         this.setState({isLoading: true});
-        const url = 'http://54.153.46.53:5000/api/recipes/cuisine/type';
+        const url = 'http://ec2-54-153-46-53.us-west-1.compute.amazonaws.com:5000/api/recipes/cuisine/type';
         const reqBody = {cuisine: localStorage.getItem('cuisineDetilsName')}
         this.setState({cuisineDetilsName: localStorage.getItem('cuisineDetilsName')});
         axios.post(url, reqBody)

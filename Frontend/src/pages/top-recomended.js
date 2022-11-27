@@ -16,7 +16,7 @@ export default class TopRecomended extends Component {
 
     componentDidMount() {
         console.log("comp ,ount ")
-        const url = 'http://54.153.46.53:5000/api/recipes/popular';
+        const url = 'http://ec2-54-153-46-53.us-west-1.compute.amazonaws.com/:5000/api/recipes/popular';
         axios.get(url)
             .then(response => {
                 const data = response.data;

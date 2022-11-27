@@ -26,7 +26,7 @@ export default class Home extends Component {
     handleSearch = () => {
        
         this.setState({isLoading: true});
-        const url = 'http://54.153.46.53:5000/api/recipes/ingredients';
+        const url = 'http://ec2-54-153-46-53.us-west-1.compute.amazonaws.com:5000/api/recipes/ingredients';
         const user_token = localStorage.getItem('token');
         const payload = {ingredients: this.state.selectedIngredient,token:user_token}
         axios.post(url, payload)
@@ -50,7 +50,7 @@ export default class Home extends Component {
     };
 
     componentDidMount() {
-        const url = 'http://54.153.46.53:5000/api/ingredients';
+        const url = 'http://ec2-54-153-46-53.us-west-1.compute.amazonaws.com:5000/api/ingredients';
         axios.get(url)
             .then(response => {
                 const ingredients = response.data;

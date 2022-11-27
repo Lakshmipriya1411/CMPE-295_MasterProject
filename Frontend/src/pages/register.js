@@ -29,7 +29,7 @@ export default class Register extends Component {
     handleSubmit = event => {
         event.preventDefault();
         this.setState({isLoading: true});
-        const url = 'http://54.153.46.53:5000/api/auth/signup';
+        const url = 'http://ec2-54-153-46-53.us-west-1.compute.amazonaws.com:5000/api/auth/signup';
         const user_email = this.state.email;
         const user_password = this.state.password;
         const user_name = this.state.userName;
