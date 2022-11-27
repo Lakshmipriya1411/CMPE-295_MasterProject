@@ -23,7 +23,7 @@ export default class Login extends Component {
     handleSubmit = event => {
         event.preventDefault();
         this.setState({isLoading: true});
-        const url = 'http://127.0.0.1:5000/api/auth/signin';
+        const url = 'http://54.153.46.53:5000/api/auth/signin';
         const email = this.state.email;
         const password = this.state.password;
         const bodyFormData = {"user_email": email, "user_password": password}

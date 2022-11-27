@@ -16,7 +16,7 @@ export default class NonVegRecipes extends Component {
 
     componentDidMount() {
        // const url = 'http://127.0.0.1:5000/api/recipes/diet/type';
-        const url = 'http://127.0.0.1:5000/api/nonvegan';
+        const url = 'http://54.153.46.53:5000/api/nonvegan';
         axios.get(url)
             .then(response => {
                 const data = response.data;
