@@ -120,4 +120,4 @@ def run_tfidf(input_ner, num_results):
 #     return df_indices
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0/0', port=5000)
+    app.run(host='0.0.0.0', port=5000)
