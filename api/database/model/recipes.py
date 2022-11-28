@@ -423,12 +423,12 @@ class RecipeModel:
                 else :
                     lstitem['description']=''
 
-                if 'rating' in recipe and recipe['rating']!='NaN': 
-                      lstitem['rating'] = recipe.get("user_rating") if 'user_rating' in recipe else ''
+                if 'user_rating' in recipe and recipe['user_rating']!='NaN': 
+                      lstitem['rating'] = recipe["user_rating"] if 'user_rating' in recipe else ''
                 else :
                     lstitem['rating']=''
                 if 'review' in recipe and recipe['review']!='NaN': 
-                    lstitem['review'] = recipe.get("user_review") if 'user_review' in recipe else ''
+                    lstitem['review'] = recipe["user_review"] if 'user_review' in recipe else ''
                 else :
                     lstitem['review']=''
                 if 'ingredients' in recipe and recipe['ingredients']!='NaN': 
