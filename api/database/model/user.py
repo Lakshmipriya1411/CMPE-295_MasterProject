@@ -16,7 +16,6 @@ class UserModel:
         def __init__(self):
             self.validator = Validator()
             self.db = db
-            #print("in valid")
             self.collection_name = 'user'  # collection name
             self.fields = {
             # "user_id": "string",
@@ -50,7 +49,6 @@ class UserModel:
         def sign_up(self, user):
             # Validator will throw error if invalid
             salt = 'secret'
-            #key = hashlib.pbkdf2_hmac('sha256', user['user_password'].encode('utf-8'), salt, 100000)
             bytes = user['user_password'].encode('utf-8')
   
             # generating the salt
@@ -59,8 +57,6 @@ class UserModel:
             # Hashing the password
             hash = bcrypt.hashpw(bytes, salt)
             user['user_password'] = hash
-            #existing_users = list(db.user_dataset.find())
-            #print("1")
             existing_users = list(db.user_dataset.find({}, {'user_id':1}))
             existing_users_lst =[]
             for usr in existing_users:
@@ -84,8 +80,6 @@ class UserModel:
             ser = Service(self.collection_name)
             myquery = { "_id":ObjectId(user_id) }
             newvalues = { "$set": { "access_token": '',"log_out_time":datetime.datetime.now() } }
-            #print(myquery)
-            #print(newvalues)
             return ser.update(myquery,newvalues)
         
         
@@ -94,12 +88,7 @@ class UserModel:
             return ser.find_one_email('user_email',email)
 
         def save_access_token(self,token,user):
-            #print('token')
-            #print(user)
             ser = Service(self.collection_name)
-            #user['access_token'] = token
-            # user['log_in_time'] = datetime.datetime.now()
-            #print(token)
             myquery = { "_id": ObjectId(user['_id']) }
            
             newvalues = { "$set": { "access_token": token,"log_in_time":datetime.datetime.now() } }

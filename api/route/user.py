@@ -20,6 +20,5 @@ user_api = Blueprint('api',__name__)
 
 def user():
     user = User()
-    #print("user here")
     result = user.register()
     return result

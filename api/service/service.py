@@ -13,7 +13,6 @@ from surprise.model_selection import train_test_split, KFold
 import random
 
 df = pd.read_csv('~/Downloads/recipe_dataset_new.csv',header=0)
-#print(df.tail(3))
 
 df_search = df.copy()
 df_search = df_search.drop_duplicates(subset="recipe_id")
@@ -31,13 +30,11 @@ class Service:
         if(collection == 'user'):
             self.db = db.user
         elif collection == 'ingredients':
-            #print("its ingreds")
             self.db = db.ingredient_dataset
 
     def insert(self,object):
         res = self.db.insert_one(object)
-        #print(res.inserted_id)
-        #db.user_dataset.insert_one(user)
+
         return "Inserted Id " + str(res.inserted_id)
     def get_list_string(self,values):
         ings = '['
@@ -87,7 +84,7 @@ class Service:
         return "Successfully updated the record"
 
     def find_ingreds(self,collectioname):  # find all
-        #print("am here")
+
         if(collectioname == 'ingredient_datatset'):
             dbi = db.ingredient_datatset
             return (list(dbi.find()))
@@ -129,9 +126,8 @@ class Service:
         return self.db.find_one({ field: value })
 
     def find_one_email(self,field,value):
-        #print("isuue here")
         return self.db.find_one({ field: value })
-#             return jsonify({ "error": "Email address already in use" }), 400
+
     def find_one(self,collection,field,value):
         return db.recipe_dataset.find_one({ field: value })
 
@@ -149,21 +145,16 @@ class Service:
         return self.db.delete(id, self.collection_name)
     
     def find_matching_cuisine(self,collection,cuisine):
-        print(cuisine)
         lst_res = list( db.recipe_dataset.find({"recipe_tags":{"$regex":cuisine}}).limit(150))
-        print("resss")
-        #print(lst_res)
         return lst_res
 
     def find_matching_vegan(Self,colelction):
-        #print(df.tail(2))
+
         column_output = ['recipe_id','title','ingredients','recipe_tags']
         vegan_recipes = df[df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
-        #print(vegan_recipes)
         return vegan_recipes.to_dict('records')
 
     def find_matching_non_vegan(Self,colelction):
-        #print(df.tail(2))
         column_output = ['recipe_id','title','ingredients','recipe_tags']
         nonvegan_recipes = df[~df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
         return nonvegan_recipes.to_dict('records')
@@ -171,13 +162,11 @@ class Service:
     def train(self,df):
         def split_train_test(data, svd):
             trainset, testset = train_test_split(data, test_size=0.25)
-            #trainset = data.build_full_trainset()
             svd.fit(trainset)
-        #df_res = pd.DataFrame(df)
+
 
         reader = Reader(rating_scale=(1, 5))
-        # Train the dataset
-        #reader = Reader()
+
         svd = SVD()
         data = Dataset.load_from_df(df[['user_id', 'recipe_id', 'user_rating']], reader)
         split_train_test(data, svd)
@@ -228,9 +217,8 @@ class Service:
                 ings+=','
         
         ings +=']'
-        #print("user_id"+user_id)
+
         indices = self.run_tfidf(ings, 100)
-        #print(indices)
         rating_df = df_search.copy()
         rating_df = rating_df[rating_df.index.isin(indices)]
         rating_df.reset_index()
@@ -238,13 +226,11 @@ class Service:
         #Step 1. Read ratings from Mongo DB
         dfre = list(db.recipe_dataset.find({'title': { "$in": list(rating_df['title'])} } ))
         dfre_df = pd.DataFrame(dfre)
-        #print(dfre_df)
         dfre_df['recipe_id'] = dfre_df['recipe_id'].fillna("0")
         dfre_df['user_id'] = dfre_df['user_id'].fillna("0")
         dfre_df['user_rating'] = dfre_df['user_rating'].fillna("0")
         dfre_con = dfre_df.astype({'recipe_id': 'int64','user_id':'int64','user_rating':'int64'})
         df1 = dfre_con.filter(items=['recipe_id','user_id', 'user_rating'])
-        #print(df1)
         #Step 2. Add ratings if the pased in user rated any of these pairwise similarity result recipes
         for ind in rating_df.index:
             title = rating_df['title'][ind]
@@ -252,20 +238,16 @@ class Service:
             if not df.loc[(df['title']==title) & (df['user_id'] == int(user_id))].empty:
                 dg = df.loc[(df['title']==title) & (df['user_id'] == int(user_id))]
                 df1.loc[len(df1.index)] = [int(dg['recipe_id']), int(user_id), int(dg['user_rating'])] 
-        #print(df1)
 
         # Step 3. Find matching ingredients in u(ser rating and get those top 5 records
-        #cold_start_df = df.query('user_id=='+str(user_id)+"'")
         cold_start_df=df.query("user_id == "+user_id)
         indi = self.tfidf_model_cold_start(ings, 100,cold_start_df)
-        #print("ind")
-        #print(indi)
+
         rating_df_cs = df.copy()
         rating_df_cs = rating_df_cs[rating_df_cs.index.isin(indi)]
         rating_df_cs.reset_index()
-        #print(rating_df_cs)
+   
         dfre_ur = db.recipe_dataset.find({ 'title': { '$in': list(rating_df['title']) } ,'user_id':str(user_id)} )
-        #print("DF")
         dfre_df = pd.DataFrame(dfre_ur)
 
         if not dfre_df.empty: 

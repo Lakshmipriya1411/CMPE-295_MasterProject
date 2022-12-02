@@ -7,7 +7,6 @@ from app import ma
 ma.Schema.TYPE_MAPPING[ObjectId] = fields.String
 
 class UserSchema(ma.Schema):
-    #print("here:")
     id = fields.String(dumps_only=True)
     user_name = fields.String(required = True,validate=validate.Length(max=64))
     user_email = fields.Email(required=True)
@@ -15,4 +14,4 @@ class UserSchema(ma.Schema):
 
     class Meta:
         ordered = True
-        #dump_only = ['id','user_email','user_name']
+

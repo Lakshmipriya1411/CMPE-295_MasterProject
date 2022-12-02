@@ -82,11 +82,7 @@ class SignoutApi(Resource):
     def post(self):
         try:
             signOut.logger.info("------------------Enter Sign---------------")
-            #body = request.get_json()
-            #email = body.get('user_email')
-            #print("y dng this to me")
             user_id = get_jwt_identity()
-            #print("userid "+user_id)
             user = userModel.find_by_id(user_id)
             userModel.sign_out(user_id)
             return {'message':'successfully Logged out' }, 200

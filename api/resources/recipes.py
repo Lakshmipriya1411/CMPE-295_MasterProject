@@ -49,7 +49,6 @@ class GetCuisineRecipesApi(Resource):
             logGetSelectedCusines.logger.info("------------------Enter get REcipes By Cusine Type---------------")
             rcp = request.get_json()
             csn = rcp.get('cuisine')
-            print("cuisine set"+csn)
             recipeslst = recipeModel.get_recipes_by_selected_cuisine_type(csn)
             
             logGetSelectedCusines.logger.info("Get Selected Recipe By Cusine success")
@@ -132,25 +131,6 @@ class GetPopularRatedRecipesApi(Resource):
             return {'error': 'Error processing the request'}, 400
 
 
-# class GetPopularRatedRecipesApi(Resource):
-#     def get(self):
-#         try:
-#             signUp.logger.info("------------------Enter get REcipes By Cusine Type---------------")
-#             rcp = request.get_json()
-#             csn = rcp.get('rating')
-#             recipeslst = recipeModel.get_recipes_by_rating(csn)
-#             #print("controller")
-#             #print(recipeslst)
-#             signUp.logger.info("Inserted docuemnt successfully")
-#             signUp.logger.info("------------------End of Get REcipes By Cusine Type---------------")
-#             return  {"recipes":json.dumps(recipeslst)}, 200
-#             #return jsonify({ "error": "Email address already in use" }), 400
-
-#         except Exception as ex:
-#             signUp.logger.error("Error processing the request")
-#             raise ex
-#             #return {'error': 'Error processing the request'}, 400
-
 class GetPopularReviewedRecipesApi(Resource):
     @cross_origin()
     def get(self):
@@ -224,17 +204,14 @@ class GetRecipesByIngredientsApi(Resource):
         try:
             logGetIngredRecipes.logger.info("------------------Enter Get Recipes By Ingredients List---------------")
             rcp = request.get_json()
-            #print("j")
-            #print(rcp)
+
             ct = rcp.get('ingredients')
             user = rcp.get('token')
             recipeslst = recipeModel.get_recipes_by_selected_ingredients(ct,user)
 
             logGetIngredRecipes.logger.info("Get Recipe By Selected Ingredients success")
             logGetIngredRecipes.logger.info("------------------End of Get REcipes By Ingredients List---------------")
-            #data = {"recipes":recipeslst}
-            #print(data["recipes"])
-             
+
             return {"recipes":recipeslst}, 200
         except Exception as ex:
             logGetIngredRecipes.logger.error("Error processing the request")

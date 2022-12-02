@@ -14,11 +14,10 @@ CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 cors = CORS(app, resources={r"/api/": {"origins": "http://ec2-54-153-46-53.us-west-1.compute.amazonaws.com:5000/"}})
-#app.config.from_pyfile('config.py')
+
 swagger = Swagger(app)
 mail = Mail(app)
-#print(os.environ['JWT_SECRET_KEY'])
-#app.config['JWT_SECRET_KEY'] =  os.environ['JWT_SECRET_KEY']
+
 from flask_restful import Api
 api = Api(app, errors=errors)
 bcrypt = Bcrypt(app)
@@ -28,7 +27,6 @@ ma = Marshmallow(app)
 # imports requiring app and mail
 from api.resources.routes import initialize_routes
 
-#initialize_db(app)
 initialize_routes(api)
 
 
