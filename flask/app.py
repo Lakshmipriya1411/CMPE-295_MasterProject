@@ -42,14 +42,12 @@ def vegan():
         Returns:
             list of vegan recipes
     """
-    #all_vegan_recipes = list(recipe_dataset.aggregate( [ { '$match': {'recipe_tags': {'$regex': 'vegan'} } } ]))
-    # vegan_df = pd.DataFrame(all_vegan_recipes)
-    # local_vegan_df = df[df['recipe_tags'].str.contains('vegan')]
+
 
     column_output = ['recipe_id','title','ingredients','recipe_tags']
-    #vegan_recipes = vegan_df.groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
+
     vegan_recipes = df[df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
-    #print(vegan_recipes)
+
 
     return render_template('index.html', recipes=vegan_recipes.to_dict('records'))
 
@@ -60,11 +58,10 @@ def non_vegan():
         Returns:
             list of nonvegan recipes
     """
-    #all_nonvegan_recipes = list(recipe_dataset.aggregate( [ { '$match': {'recipe_tags': {'$regex': 'nonvegan'} } } ]))
     
     column_output = ['recipe_id','title','ingredients','recipe_tags']
     nonvegan_recipes = df[~df['recipe_tags'].str.contains('vegan')].groupby(column_output)['user_rating'].agg(["count", "mean"]).reset_index().sort_values(by=["mean", "count"], ascending=False).head(20)
-    #print(nonvegan_recipes)
+
 
     return render_template('index.html', recipes=nonvegan_recipes.to_dict('records'))
 
@@ -80,7 +77,7 @@ def search():
     recipes = list(recipe_dataset.find( { "" : { "$in" : str_indices } } ) )
 
     rating_df = pd.DataFrame(recipes)
-    #print(rating_df)
+
     rating_df['estimate_rating'] = rating_df['recipe_id'].apply(lambda x: collaborative_filtering_model[1].predict(4470, x).est)
     rating_df = rating_df.drop_duplicates(subset="recipe_id")
     rating_df = rating_df.sort_values('estimate_rating', ascending=False)
@@ -120,4 +117,4 @@ def run_tfidf(input_ner, num_results):
 #     return df_indices
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=8000)
